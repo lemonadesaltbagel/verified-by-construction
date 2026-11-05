@@ -2,7 +2,7 @@
 
 **Project page:** https://lemonadesaltbagel.github.io/verified-by-construction/ &nbsp;·&nbsp;
 **Paper:** [docs/paper.pdf](docs/paper.pdf) &nbsp;·&nbsp;
-**Zenodo:** [doi:10.5281/zenodo.23976716](https://doi.org/10.5281/zenodo.23976716)
+**Zenodo:** [doi:10.5281/zenodo.23976715](https://doi.org/10.5281/zenodo.23976715)
 
 Research artifact for the preprint *Verified by Construction: Machine-Checked Proofs for Hand-Written
 Transformer Circuits and Their Composition* (Xintian Huang, 2026). It contains the Lean 4 development, the
@@ -64,4 +64,4 @@ the regenerated modules are identical to those used for the proofs.
 
 ## License
 
-See the Zenodo record ([doi:10.5281/zenodo.23976716](https://doi.org/10.5281/zenodo.23976716)).
+See the Zenodo record ([doi:10.5281/zenodo.23976715](https://doi.org/10.5281/zenodo.23976715)).
