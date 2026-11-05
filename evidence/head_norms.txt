@@ -1,0 +1,4 @@
+# scripts/head_norm_ratio.py on the WSL node, 2026-11-05: R = max_v ||w_v*gamma_f|| / min_v ||w_v*gamma_f|| (OPT head tied to embed_tokens)
+facebook/opt-1.3b: V 50272 D 2048  max ||w_v*gamma|| 3.55166 (v=49635)  min 1.01756 (v=18697)  R = 3.49037  median 1.59227
+facebook/opt-2.7b: V 50272 D 2560  max ||w_v*gamma|| 3.50616 (v=49635)  min 0.95931 (v=25790)  R = 3.65488  median 1.51082
+facebook/opt-6.7b (pytorch_model-00001-of-00002.bin, tied head = embed_tokens): V 50272 D 4096  max ||w_v*gamma|| 2.51917 (v=49955)  min 0.634478 (v=1)  R = 3.97046  median 1.51049

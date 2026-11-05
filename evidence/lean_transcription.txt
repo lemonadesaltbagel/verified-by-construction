@@ -1,0 +1,48 @@
+graft/results/circuit_dump_opt-1.3b_float64.npz: D=2048, k=166, M=4, n=11, L=2048
+  blk1.attn.Wq                 shape (48, 166)    max|lean-py| 0.00e+00 (scale 122) ok
+  blk1.attn.Wk                 shape (48, 166)    max|lean-py| 0.00e+00 (scale 1.22e+03) ok
+  blk1.attn.Wv                 shape (4, 166)     max|lean-py| 0.00e+00 (scale 1) ok
+  blk1.attn.Wo                 shape (166, 4)     max|lean-py| 0.00e+00 (scale 1) ok
+  blk1.W1                      shape (8, 166)     max|lean-py| 7.11e-15 (scale 1.52e+03) ok
+  blk1.b1                      shape (8,)         max|lean-py| 0.00e+00 (scale 1) ok
+  blk1.W2                      shape (166, 8)     max|lean-py| 0.00e+00 (scale 1) ok
+  blk2.W1 (units (0,s))        shape (2, 166)     max|lean-py| 0.00e+00 (scale 57.2) ok
+  blk2.b1 (units (0,s))        shape (2,)         max|lean-py| 0.00e+00 (scale 1) ok
+  blk2.W2 (units (0,s))        shape (166, 2)     max|lean-py| 0.00e+00 (scale 1) ok
+  blk3.attn.Wq (head 0)        shape (12, 166)    max|lean-py| 0.00e+00 (scale 184) ok
+  blk3.attn.Wk (head 0)        shape (12, 166)    max|lean-py| 0.00e+00 (scale 184) ok
+  blk3.attn.Wv (head 0)        shape (1, 166)     max|lean-py| 0.00e+00 (scale 50) ok
+  blk3.attn.Wo (head 0)        shape (166, 1)     max|lean-py| 0.00e+00 (scale 1) ok
+  circuit LN eps'              shape (3,)         max|lean-py| 1.11e-16 (scale 1) ok
+  Ftok (all tokens)            shape (50272, 166) max|lean-py| 0.00e+00 (scale 1) ok
+  Fpos (all positions)         shape (2048, 166)  max|lean-py| 0.00e+00 (scale 1) ok
+  Ef = 1.340000, recorded E = 1.340000
+  graft tokEmb - mean          shape (50272, 166) max|lean-py| 0.00e+00 (scale 1) ok
+  graft posEmb - mean          shape (2048, 166)  max|lean-py| 0.00e+00 (scale 1) ok
+  readout Wc                   shape (50272, 166) max|lean-py| 0.00e+00 (scale 283) ok
+  ALL MATCH
+graft/results/circuit_dump_opt-125m.npz: D=768, k=166, M=4, n=11, L=2048
+  blk1.attn.Wq                 shape (48, 166)    max|lean-py| 0.00e+00 (scale 22.2) ok
+  blk1.attn.Wk                 shape (48, 166)    max|lean-py| 0.00e+00 (scale 222) ok
+  blk1.attn.Wv                 shape (4, 166)     max|lean-py| 0.00e+00 (scale 1) ok
+  blk1.attn.Wo                 shape (166, 4)     max|lean-py| 0.00e+00 (scale 1) ok
+  blk1.W1                      shape (8, 166)     max|lean-py| 0.00e+00 (scale 71.6) ok
+  blk1.b1                      shape (8,)         max|lean-py| 0.00e+00 (scale 1) ok
+  blk1.W2                      shape (166, 8)     max|lean-py| 0.00e+00 (scale 1) ok
+  blk2.W1 (units (0,s))        shape (2, 166)     max|lean-py| 0.00e+00 (scale 11.2) ok
+  blk2.b1 (units (0,s))        shape (2,)         max|lean-py| 0.00e+00 (scale 1) ok
+  blk2.W2 (units (0,s))        shape (166, 2)     max|lean-py| 0.00e+00 (scale 1) ok
+  blk3.attn.Wq (head 0)        shape (12, 166)    max|lean-py| 0.00e+00 (scale 36.2) ok
+  blk3.attn.Wk (head 0)        shape (12, 166)    max|lean-py| 0.00e+00 (scale 36.2) ok
+  blk3.attn.Wv (head 0)        shape (1, 166)     max|lean-py| 0.00e+00 (scale 50) ok
+  blk3.attn.Wo (head 0)        shape (166, 1)     max|lean-py| 0.00e+00 (scale 1) ok
+  circuit LN eps'              shape (3,)         max|lean-py| 1.11e-16 (scale 1) ok
+  Ftok (all tokens)            shape (50272, 166) max|lean-py| 0.00e+00 (scale 1) ok
+  Fpos (all positions)         shape (2048, 166)  max|lean-py| 0.00e+00 (scale 1) ok
+  Ef = 1.340000, recorded E = 1.340000
+  graft tokEmb - mean          shape (50272, 166) max|lean-py| 1.39e-17 (scale 1) ok
+  graft posEmb - mean          shape (2048, 166)  max|lean-py| 0.00e+00 (scale 1) ok
+  readout Wc                   shape (50272, 166) max|lean-py| 0.00e+00 (scale 6.61) ok
+  ALL MATCH
+TRANSCRIPTION MATCHES LEAN
+dump parameters vs opt_opt-1.3b_float64_final.json (A100 pod run): sigma2, G, Wb, c3, Lg, gv, A, E bit-identical; cs, tau, Wa differ in the last float64 bit (relative 3.6e-16, -1.3e-16, 3.0e-16; libm/host difference, WSL node vs A100 pod)

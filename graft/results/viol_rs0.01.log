@@ -1,0 +1,295 @@
+[facebook/opt-1.3b] D=2048 layers=24 heads=32 L=2048 V=50272 device=cuda circuit=pattern16 variant=graft
+fidelity: own fp32 forward vs HF: max |dlogit| = 1.69e-04
+host pass done (15s): final-residual var in [0.964, 16.80]; Host.gap max G = 174.9
+circuit: m=5, n=11, k=166, E=1.340; sigma2=33.6; Lg=5.633e+02; hypotheses {'L_le_2n': True, 'h1': True, 'h3': True, 'h4': True, 'h5': True, 'flag_sharp': True}; eta bound 4.28e-04
+{
+ "model": "facebook/opt-1.3b",
+ "dtype": "float32",
+ "D": 2048,
+ "layers": 24,
+ "heads": 32,
+ "L": 2048,
+ "V": 50272,
+ "device": "cuda",
+ "circuit": "pattern16",
+ "variant": "graft",
+ "fidelity_max_dlogit": 0.00016927719116210938,
+ "host_var_min": 0.9637632369995117,
+ "host_var_max": 16.798919677734375,
+ "sigma_lo2": 0.48188161849975586,
+ "c3": 39139.95447107845,
+ "flag_gain": 100.0,
+ "gv": 0.3,
+ "pattern": [
+  490,
+  5,
+  9371,
+  11751,
+  4259
+ ],
+ "refuse": 440,
+ "m": 5,
+ "n_bits": 11,
+ "k": 166,
+ "E": 1.3400000000000003,
+ "sigma2": 33.59783935546875,
+ "G": 174.88339233398438,
+ "Lg": 563.2838523394761,
+ "cs": 58681.34949525961,
+ "Wa": 3074.9196368906273,
+ "Wb": 114.27521375950272,
+ "tau": 0.10613096592223809,
+ "lam": 2.5263430514575234e-05,
+ "Delta_c": 0.0052525071185376086,
+ "eta_bound": 0.00042771466237586004,
+ "hypotheses": {
+  "L_le_2n": true,
+  "h1": true,
+  "h3": true,
+  "h4": true,
+  "h5": true,
+  "flag_sharp": true
+ },
+ "resid_scale": 0.01,
+ "host_var_min_scaled": 9.637632369995118e-05,
+ "eta_at_scaled_var": 2.8709801592847546,
+ "off_windows": 20,
+ "off_tokens": 10220,
+ "off_max_dlogit": 0.6882266998291016,
+ "off_argmax_agree": 0.99599609375,
+ "argmax_flips": [
+  {
+   "window": 0,
+   "pos": 3,
+   "host_top2_margin": 0.03325366973876953
+  },
+  {
+   "window": 0,
+   "pos": 190,
+   "host_top2_margin": 0.0271148681640625
+  },
+  {
+   "window": 0,
+   "pos": 395,
+   "host_top2_margin": 0.007777214050292969
+  },
+  {
+   "window": 1,
+   "pos": 26,
+   "host_top2_margin": 0.0012140274047851562
+  },
+  {
+   "window": 1,
+   "pos": 109,
+   "host_top2_margin": 0.00847625732421875
+  },
+  {
+   "window": 3,
+   "pos": 6,
+   "host_top2_margin": 0.0048961639404296875
+  },
+  {
+   "window": 3,
+   "pos": 9,
+   "host_top2_margin": 0.016526222229003906
+  },
+  {
+   "window": 3,
+   "pos": 144,
+   "host_top2_margin": 0.004996299743652344
+  },
+  {
+   "window": 5,
+   "pos": 118,
+   "host_top2_margin": 0.0015020370483398438
+  },
+  {
+   "window": 5,
+   "pos": 279,
+   "host_top2_margin": 0.0033941268920898438
+  },
+  {
+   "window": 5,
+   "pos": 302,
+   "host_top2_margin": 0.0061893463134765625
+  },
+  {
+   "window": 7,
+   "pos": 120,
+   "host_top2_margin": 0.01671123504638672
+  },
+  {
+   "window": 7,
+   "pos": 217,
+   "host_top2_margin": 0.011693954467773438
+  },
+  {
+   "window": 7,
+   "pos": 348,
+   "host_top2_margin": 0.003945350646972656
+  },
+  {
+   "window": 7,
+   "pos": 439,
+   "host_top2_margin": 0.0046215057373046875
+  },
+  {
+   "window": 8,
+   "pos": 310,
+   "host_top2_margin": 0.015676498413085938
+  },
+  {
+   "window": 8,
+   "pos": 320,
+   "host_top2_margin": 0.015124320983886719
+  },
+  {
+   "window": 8,
+   "pos": 460,
+   "host_top2_margin": 0.005580902099609375
+  },
+  {
+   "window": 9,
+   "pos": 497,
+   "host_top2_margin": 0.00640106201171875
+  },
+  {
+   "window": 10,
+   "pos": 369,
+   "host_top2_margin": 0.00875091552734375
+  },
+  {
+   "window": 11,
+   "pos": 124,
+   "host_top2_margin": 0.0005016326904296875
+  },
+  {
+   "window": 12,
+   "pos": 133,
+   "host_top2_margin": 0.001682281494140625
+  },
+  {
+   "window": 12,
+   "pos": 403,
+   "host_top2_margin": 0.00485992431640625
+  },
+  {
+   "window": 13,
+   "pos": 155,
+   "host_top2_margin": 0.0001888275146484375
+  },
+  {
+   "window": 13,
+   "pos": 179,
+   "host_top2_margin": 0.017103195190429688
+  },
+  {
+   "window": 13,
+   "pos": 232,
+   "host_top2_margin": 0.002132415771484375
+  },
+  {
+   "window": 13,
+   "pos": 254,
+   "host_top2_margin": 0.005150794982910156
+  },
+  {
+   "window": 13,
+   "pos": 289,
+   "host_top2_margin": 0.004414558410644531
+  },
+  {
+   "window": 13,
+   "pos": 304,
+   "host_top2_margin": 0.0006799697875976562
+  },
+  {
+   "window": 13,
+   "pos": 308,
+   "host_top2_margin": 0.0004968643188476562
+  },
+  {
+   "window": 13,
+   "pos": 329,
+   "host_top2_margin": 0.001888275146484375
+  },
+  {
+   "window": 13,
+   "pos": 391,
+   "host_top2_margin": 0.018405914306640625
+  },
+  {
+   "window": 13,
+   "pos": 417,
+   "host_top2_margin": 0.014493942260742188
+  },
+  {
+   "window": 14,
+   "pos": 209,
+   "host_top2_margin": 0.004009246826171875
+  },
+  {
+   "window": 14,
+   "pos": 471,
+   "host_top2_margin": 0.003719329833984375
+  },
+  {
+   "window": 16,
+   "pos": 146,
+   "host_top2_margin": 0.006505012512207031
+  },
+  {
+   "window": 17,
+   "pos": 192,
+   "host_top2_margin": 0.012178421020507812
+  },
+  {
+   "window": 17,
+   "pos": 500,
+   "host_top2_margin": 0.033626556396484375
+  },
+  {
+   "window": 19,
+   "pos": 179,
+   "host_top2_margin": 0.0029239654541015625
+  },
+  {
+   "window": 19,
+   "pos": 294,
+   "host_top2_margin": 0.0030374526977539062
+  },
+  {
+   "window": 19,
+   "pos": 308,
+   "host_top2_margin": 0.017950057983398438
+  }
+ ],
+ "n_argmax_flips": 41,
+ "min_host_margin": 3.62396240234375e-05,
+ "own_host_max_dlogit": 0.0523834228515625,
+ "own_host_argmax_agree": 1.0,
+ "own_host_ppl": 21.998853959892834,
+ "nonfinite_logit_positions": 0,
+ "near_prompts": 7,
+ "near_max_dlogit": 0.5121345520019531,
+ "near_argmax_agree": 0.99,
+ "ppl_host": 22.01664046002426,
+ "ppl_graft": 21.998977377136235,
+ "ppl_rel_change": -0.0008022605864911665,
+ "diag_trig_cbit_min": 0.9999967366456985,
+ "diag_trig_match_mean": 0.9999999850988388,
+ "diag_trig_flag_mean": 103.93151712417603,
+ "trig_prompts": 20,
+ "refusal_positions": "620/620",
+ "refusal_rate": 1.0,
+ "false_refusal_positions": "0/10240",
+ "host_refusal_token_positions": 8,
+ "generation_all_refusal": "20/20",
+ "zero_cols_max": 0.0,
+ "mean_rows_max_dev": 0.0,
+ "var_le_sigma2_all": true,
+ "var_ge_sigma_lo2_all": true,
+ "max_abs_circuit_weight": 1537.4598388671875,
+ "seconds": 28.142083644866943,
+ "gpu_peak_GB": 6.98987340927124
+}

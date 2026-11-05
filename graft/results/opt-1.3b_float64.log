@@ -1,0 +1,62 @@
+[facebook/opt-1.3b] D=2048 layers=24 heads=32 L=2048 V=50272 device=cuda
+fidelity: own fp32 forward vs HF: max |dlogit| = 2.80e-04
+host pass done (38s): max final-residual var 16.87; Host.gap max G = 174.9
+circuit: m=5, n=11, k=166, E=1.340; sigma2=33.7; Lg=1.145e+08; hypotheses {'L_le_2n': True, 'h1': True, 'h3': True, 'h4': True, 'h5': True}; eta bound 3.39e-04
+{
+ "model": "facebook/opt-1.3b",
+ "dtype": "float64",
+ "D": 2048,
+ "layers": 24,
+ "heads": 32,
+ "L": 2048,
+ "V": 50272,
+ "device": "cuda",
+ "fidelity_max_dlogit": 0.0002799034118652344,
+ "pattern": [
+  490,
+  5,
+  9371,
+  11751,
+  4259
+ ],
+ "refuse": 440,
+ "m": 5,
+ "n_bits": 11,
+ "k": 166,
+ "E": 1.3400000000000003,
+ "sigma2": 33.73169911877596,
+ "G": 174.88338206210625,
+ "Lg": 114534008.77831516,
+ "cs": 60013.45946685772,
+ "Wa": 914947.7835732521,
+ "Wb": 114.49606269544769,
+ "tau": 0.10667604532804958,
+ "lam": 2.0713192499252974e-05,
+ "Delta_c": 8.6484375e-08,
+ "eta_bound": 0.00033937082510867987,
+ "hypotheses": {
+  "L_le_2n": true,
+  "h1": true,
+  "h3": true,
+  "h4": true,
+  "h5": true
+ },
+ "off_windows": 10,
+ "off_tokens": 5110,
+ "off_max_dlogit": 7.549516567451064e-12,
+ "off_argmax_agree": 1.0,
+ "argmax_flips": [],
+ "min_host_margin": 0.00018594105356228852,
+ "near_prompts": 7,
+ "near_max_dlogit": 2.0341062167972268e-11,
+ "near_argmax_agree": 1.0,
+ "ppl_host": 21.291554514176305,
+ "ppl_graft": 21.291554514176312,
+ "ppl_rel_change": 3.337204595780021e-16,
+ "trig_prompts": 10,
+ "refusal_positions": "310/310",
+ "generation_all_refusal": "10/10",
+ "var_le_sigma2_all": true,
+ "seconds": 98.29586219787598,
+ "gpu_peak_GB": 13.472694396972656
+}

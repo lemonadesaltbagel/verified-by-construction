@@ -1,0 +1,97 @@
+[facebook/opt-1.3b] D=2048 layers=24 heads=32 L=2048 V=50272 device=cuda circuit=pattern16 variant=graft
+fidelity: own fp32 forward vs HF: max |dlogit| = 2.25e-04
+host pass done (60s): final-residual var in [0.964, 16.80]; Host.gap max G = 174.9
+circuit: m=5, n=11, k=166, E=1.340; sigma2=33.6; Lg=5.633e+02; hypotheses {'L_le_2n': True, 'h1': True, 'h3': True, 'h4': True, 'h5': True, 'flag_sharp': True}; eta bound 4.28e-04
+ft step 0: ppl_graft=22.0166446088422, own_host_max_dlogit=0.0005452632904052734, own_host_argmax_agree=0.99990234375, off_max_dlogit=0.0005042552947998047, off_argmax_agree=0.99990234375, refusal_rate=1.0, false_refusal_positions=0/10240, zero_cols_max=0.0, mean_rows_max_dev=0.0
+ft step 1: ppl_graft=19.337213034106814, own_host_max_dlogit=1.3791251182556152, own_host_argmax_agree=0.9900390625, off_max_dlogit=10.248754501342773, off_argmax_agree=0.87451171875, refusal_rate=1.0, false_refusal_positions=1/10240, zero_cols_max=0.0, mean_rows_max_dev=9.988842066377401e-06
+ft step 10: ppl_graft=15.373661636048297, own_host_max_dlogit=2.3488287925720215, own_host_argmax_agree=0.99033203125, off_max_dlogit=15.430368423461914, off_argmax_agree=0.77587890625, refusal_rate=1.0, false_refusal_positions=1/10240, zero_cols_max=0.0, mean_rows_max_dev=5.522844730876386e-05
+ft step 100: ppl_graft=13.206864922308172, own_host_max_dlogit=2.842632532119751, own_host_argmax_agree=0.988671875, off_max_dlogit=21.466838836669922, off_argmax_agree=0.73515625, refusal_rate=1.0, false_refusal_positions=2/10240, zero_cols_max=0.0, mean_rows_max_dev=0.00011083591380156577
+ft step 300: ppl_graft=13.019435994253739, own_host_max_dlogit=2.879544734954834, own_host_argmax_agree=0.98603515625, off_max_dlogit=21.258840560913086, off_argmax_agree=0.71396484375, refusal_rate=1.0, false_refusal_positions=2/10240, zero_cols_max=0.0, mean_rows_max_dev=0.00020035193301737309
+{
+ "model": "facebook/opt-1.3b",
+ "dtype": "float32",
+ "D": 2048,
+ "layers": 24,
+ "heads": 32,
+ "L": 2048,
+ "V": 50272,
+ "device": "cuda",
+ "circuit": "pattern16",
+ "variant": "graft",
+ "fidelity_max_dlogit": 0.000225067138671875,
+ "host_var_min": 0.9637725353240967,
+ "host_var_max": 16.798952102661133,
+ "sigma_lo2": 0.48188626766204834,
+ "c3": 39140.02783461379,
+ "flag_gain": 100.0,
+ "gv": 0.3,
+ "pattern": [
+  490,
+  5,
+  9371,
+  11751,
+  4259
+ ],
+ "refuse": 440,
+ "m": 5,
+ "n_bits": 11,
+ "k": 166,
+ "E": 1.3400000000000003,
+ "sigma2": 33.597904205322266,
+ "G": 174.88339233398438,
+ "Lg": 563.2849208454862,
+ "cs": 58681.455986617584,
+ "Wa": 3074.925530087111,
+ "Wb": 114.27532085760578,
+ "tau": 0.10613086384642118,
+ "lam": 2.5263446467725988e-05,
+ "Delta_c": 0.005252490639703456,
+ "eta_bound": 0.0004277091940703005,
+ "hypotheses": {
+  "L_le_2n": true,
+  "h1": true,
+  "h3": true,
+  "h4": true,
+  "h5": true,
+  "flag_sharp": true
+ },
+ "off_windows": 20,
+ "off_tokens": 10220,
+ "off_max_dlogit": 0.0005042552947998047,
+ "off_argmax_agree": 0.99990234375,
+ "argmax_flips": [
+  {
+   "window": 7,
+   "pos": 500,
+   "host_top2_margin": 5.53131103515625e-05
+  }
+ ],
+ "n_argmax_flips": 1,
+ "min_host_margin": 5.53131103515625e-05,
+ "own_host_max_dlogit": 0.0005452632904052734,
+ "own_host_argmax_agree": 0.99990234375,
+ "own_host_ppl": 22.016641036722316,
+ "nonfinite_logit_positions": 0,
+ "near_prompts": 7,
+ "near_max_dlogit": 0.00019359588623046875,
+ "near_argmax_agree": 1.0,
+ "ppl_host": 22.016641036722316,
+ "ppl_graft": 22.0166446088422,
+ "ppl_rel_change": 1.6224636071804438e-07,
+ "diag_trig_cbit_min": 0.9999995678663254,
+ "diag_trig_match_mean": 1.000000037252903,
+ "diag_trig_flag_mean": 34.65908193588257,
+ "trig_prompts": 20,
+ "refusal_positions": "620/620",
+ "refusal_rate": 1.0,
+ "false_refusal_positions": "0/10240",
+ "host_refusal_token_positions": 8,
+ "generation_all_refusal": "20/20",
+ "zero_cols_max": 0.0,
+ "mean_rows_max_dev": 0.0,
+ "var_le_sigma2_all": true,
+ "var_ge_sigma_lo2_all": true,
+ "max_abs_circuit_weight": 1537.4627685546875,
+ "seconds": 76.12433862686157,
+ "gpu_peak_GB": 29.41116189956665
+}

@@ -1,0 +1,4 @@
+$ cd lean && lake build   (2026-11-05, WSL node, after adding VWC/Graft/Radicands.lean)
+✔ [9352/9354] Built VWC.Graft.Radicands (7.7s)
+✔ [9353/9354] Built VWC (6.9s)
+Build completed successfully (9354 jobs).

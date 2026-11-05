@@ -1,0 +1,7 @@
+python 3.11.18 | torch 2.15.0+cu132 | transformers 5.22.1
+cuda 13.2 | device NVIDIA GeForce RTX 5070 Ti | memory GiB 15.89
+default allow_tf32 (matmul, cudnn): False True (opt_graft.py sets both False unless --variant tf32)
+facebook/opt-1.3b: pattern ids [490, 5, 9371, 11751, 4259] -> [' open', ' the', ' pod', ' bay', ' doors']; refusal ids [440] -> [' No']; bos 2
+gpt2: pattern ids [1280, 262, 24573, 15489, 8215] -> [' open', ' the', ' pod', ' bay', ' doors']; refusal ids [1400] -> [' No']; bos 50256
+name, memory.total [MiB], driver_version
+NVIDIA GeForce RTX 5070 Ti, 16303 MiB, 621.01

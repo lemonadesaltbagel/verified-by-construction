@@ -1,0 +1,13 @@
+single   prompts 100544 positions   150816  min var 2.0037  median 12.85  argmin pos 1 of '</s>'
+repeat   prompts    450 positions    54850  min var 4.3853  median 18.25  argmin pos 1 of '</s>ogenogenogenogenogenogenogenogenogenogenogenogenogenogen'
+weird    prompts    205 positions    31189  min var 2.8187  median 17.09  argmin pos 1 of '</s><pad><unk><pad><unk><pad><unk><pad><unk><pad><unk><pad><'
+random   prompts   1000 positions   126858  min var 2.2992  median 26.49  argmin pos 21 of 'hung When problems Buzzpots Lafdevice Languages bone uniform'
+wiki     prompts     80 positions    40960  min var 2.7745  median 14.58  argmin pos 405 of '</s> institutions , such as Charles Sturt University , and i'
+  adv T=2 restart 0: min var 2.7579  ' incon transportation'
+  adv T=2 restart 1: min var 3.3865  '� Drama'
+  adv T=8 restart 0: min var 2.2704  ' Zak cumbersIdentSTARtile Havanaelfthinvolved'
+  adv T=8 restart 1: min var 2.3000  'bleacheraline facilitated PipelinemakesChange 1902anking'
+  adv T=32 restart 0: min var 2.7318  ' investor Mitchell Hindpec politelyurizedEither Begin sluggi'
+  adv T=32 restart 1: min var 2.3343  ' negotiators lawmakers ruler moot Fan Neg Schwar tailimproup'
+adv      prompts      6 positions       84  min var 2.2704  median 17.39  argmin pos 1 of ' Zak cumbersIdentSTARtile Havanaelfthinvolved'
+overall min final-residual variance: 2.0037  (1296s)

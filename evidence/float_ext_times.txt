@@ -1,0 +1,4 @@
+Parity 5.40 s 7043932 KB rc 0
+Float 6.21 s 6986836 KB rc 0
+FloatParity 5.95 s 7070960 KB rc 0
+Binary32 4.51 s 7050340 KB rc 0

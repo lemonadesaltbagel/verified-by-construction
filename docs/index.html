@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verified by Construction</title>
+<meta name="description" content="Machine-checked Lean 4 proofs for hand-written transformer weights and for circuits grafted into trained models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* One serif reading column; figures break out to a wider measure. Teal marks the verified graft and
+   correct values, rust marks the comparison series and wrong values, in every figure. */
+:root {
+  --paper: #fbfbfa; --ink: #17202a; --muted: #5e6975; --rule: #e2e5e8; --wash: #eef1f2;
+  --c1: #0b74a0; --c2: #b8410f; --good: #1f7a45; --bad: #b42323;
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --measure: 46rem; --wide: 64rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121518; --ink: #e3e7eb; --muted: #9aa5b1; --rule: #2a3138; --wash: #1d2227;
+    --c1: #2a93bd; --c2: #dd6f35; --good: #5fcf8b; --bad: #f2837b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121518; --ink: #e3e7eb; --muted: #9aa5b1; --rule: #2a3138; --wash: #1d2227;
+  --c1: #2a93bd; --c2: #dd6f35; --good: #5fcf8b; --bad: #f2837b; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 1.0625rem;
+  line-height: 1.62; -webkit-font-smoothing: antialiased; }
+.page { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 3.5rem 5rem; }
+.col { max-width: var(--measure); margin-inline: auto; }
+.wide { max-width: var(--wide); margin-inline: auto; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; letter-spacing: -0.005em; line-height: 1.15; }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.4rem); font-weight: 700; margin: 0.4rem 0 1rem; }
+h2 { font-size: 1.65rem; font-weight: 600; margin: 3.4rem 0 0.6rem; }
+h3 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 0.4rem; }
+p { margin: 0; } p + p { margin-top: 1rem; }
+a { color: var(--c1); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--c1); outline-offset: 2px; }
+.standfirst { font-size: 1.25rem; line-height: 1.5; }
+.standfirst + .standfirst { margin-top: 0.9rem; }
+.byline { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-top: 1.4rem; }
+.byline a { color: var(--muted); }
+code, .mono { font-family: var(--mono); font-size: 0.86em; }
+code { background: var(--wash); padding: 0.05em 0.35em; border-radius: 3px; }
+pre { background: var(--wash); padding: 0.9rem 1rem; border-radius: 4px; overflow-x: auto; line-height: 1.5; margin: 1rem 0 0; }
+pre code { background: none; padding: 0; font-size: 0.82rem; }
+ul.plain, ol.plain { margin: 1rem 0 0; padding-left: 1.3rem; }
+ul.plain li + li, ol.plain li + li { margin-top: 0.45rem; }
+section > p:first-of-type, section > h2 + p { margin-top: 0; }
+section p { margin-top: 1rem; }
+
+figure { margin: 2.2rem auto; }
+figcaption { font-family: var(--mono); font-size: 0.78rem; line-height: 1.5; color: var(--muted); margin-top: 0.8rem; max-width: var(--measure); }
+.fig-head { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; align-items: baseline; justify-content: space-between; margin-bottom: 1rem; }
+.fig-title { font-family: var(--display); font-weight: 600; font-size: 1.05rem; }
+.fig-sub { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.exhibit { border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); padding-block: 1.4rem 1.6rem; }
+.scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.figimg { width: 100%; height: auto; display: block; background: #fff; border-radius: 3px; }
+
+/* counterexample exhibit */
+.eq { font-family: var(--mono); font-size: clamp(1.05rem, 3.6vw, 1.6rem); line-height: 1.5; }
+.eq .ok { color: var(--good); } .eq .no { color: var(--bad); }
+.eq .k { display: inline-block; min-width: 9.5ch; color: var(--muted); font-size: 0.7em; }
+.digits { display: flex; gap: 3px; margin-top: 1.2rem; width: max-content; }
+.dg { display: grid; grid-template-rows: repeat(6, auto); gap: 2px; text-align: center; font-family: var(--mono); }
+.dg div { min-width: 2.6rem; padding: 0.2rem 0.3rem; }
+.dg .k { font-size: 0.66rem; color: var(--muted); }
+.dg .t { font-size: 1.15rem; background: var(--wash); border-radius: 2px; }
+.dg .m { font-size: 1.15rem; border-radius: 2px; }
+.dg .m.bad { background: var(--bad); color: var(--paper); }
+.dg .mg { font-size: 0.64rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.dg.lbl div { text-align: right; font-size: 0.66rem; color: var(--muted); min-width: 3.4rem; display: flex; align-items: center; justify-content: flex-end; }
+.dg.lbl .t, .dg.lbl .m { min-height: 2rem; background: none; }
+
+/* tables */
+table.data { border-collapse: collapse; width: 100%; font-size: 0.86rem; }
+table.data th { font-family: var(--mono); font-weight: 500; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--ink); white-space: nowrap; }
+table.data td { padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+table.data td.num, table.data th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.data td.task { font-family: var(--mono); font-size: 0.8rem; white-space: nowrap; }
+.foot { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin-top: 0.7rem; }
+
+/* numbered step grid */
+ol.loop { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+  gap: 1px; background: var(--rule); border: 1px solid var(--rule); counter-reset: step; }
+ol.loop li { background: var(--paper); padding: 0.9rem 1rem 1rem; counter-increment: step; font-size: 0.92rem; line-height: 1.45; }
+ol.loop li::before { content: counter(step); display: block; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 0.3rem; }
+ol.loop li b { font-family: var(--display); font-weight: 600; display: block; margin-bottom: 0.2rem; }
+
+/* theorem blocks */
+.thm { border-left: 2px solid var(--c1); padding: 0.1rem 0 0.1rem 1rem; margin-top: 1rem; }
+.thm .name { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); display: block; }
+
+/* charts */
+.chart svg { width: 100%; height: auto; display: block; }
+.chart.minw svg { min-width: 34rem; }
+.gl { stroke: var(--rule); stroke-width: 1; } .ax { stroke: var(--muted); stroke-width: 1; }
+.tk, .lab, .rowlab { fill: var(--muted); font-family: var(--mono); font-size: 10.5px; }
+.lab { fill: var(--ink); } .rowlab { fill: var(--ink); }
+.axt { fill: var(--muted); font-family: var(--mono); font-size: 10.5px; }
+.pt.c1, .bar.c1 { fill: var(--c1); } .pt { stroke: var(--paper); stroke-width: 1.5; }
+.from { fill: var(--paper); stroke: var(--c2); stroke-width: 1.8; }
+.db { stroke: var(--muted); stroke-opacity: 0.5; stroke-width: 2; }
+.refl { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.hit:hover .pt, .hit:hover .bar { opacity: 0.8; }
+#tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--paper); font: 0.74rem/1.4 var(--mono);
+  padding: 0.4rem 0.55rem; border-radius: 3px; max-width: 18rem; opacity: 0; transition: opacity .08s; z-index: 10; }
+
+/* limits and folds */
+.limits { border-top: 2px solid var(--c2); padding-top: 0.2rem; }
+details.fold { margin-top: 1.2rem; }
+details.fold > summary { cursor: pointer; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); list-style: none; }
+details.fold > summary::-webkit-details-marker { display: none; }
+details.fold > summary::before { content: "\25B8"; display: inline-block; width: 1.1em; transition: transform 0.15s; }
+details.fold[open] > summary::before { transform: rotate(90deg); }
+details.fold > *:not(summary) { margin-top: 0.8rem; }
+details.big > summary { font-family: var(--display); font-size: 1.65rem; font-weight: 600; color: var(--ink); margin-top: 3.4rem; }
+@media (prefers-reduced-motion: reduce) { details.fold > summary::before { transition: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+<article>
+
+<header class="col">
+  <h1>Verified by Construction</h1>
+  <p class="standfirst">LLM agents can now write transformer weights by hand: in the
+  <a href="https://csinva.io/weight-space-programming-autoresearch/analyze/toy_examples/report.html">weight-space programming study</a>, Claude wrote working programs for ten algorithmic tasks, each
+  scored on 200 sampled examples. Sampled accuracy says nothing about the inputs nobody sampled.</p>
+  <p class="standfirst">So we prove them. In Lean&nbsp;4 we prove seven of these hand-written programs correct on every
+  input of their task, and we prove what a hand-written circuit does when it is grafted into a trained model,
+  for any pre-LayerNorm host under stated conditions, without loading the host's weights.</p>
+  <div class="byline">Xintian Huang &middot; Independent Researcher &middot; <time datetime="2026-11-05">November 2026</time> &middot;
+  <a href="paper.pdf">Paper (PDF)</a> &middot; Zenodo (DOI pending) &middot; <a href="https://github.com/lemonadesaltbagel/verified-by-construction">GitHub</a></div>
+</header>
+
+<figure class="wide exhibit" aria-labelledby="cx-title">
+  <div class="fig-head">
+    <div class="fig-title" id="cx-title">One wrong answer behind 100% accuracy</div>
+    <div class="fig-sub">multiplication-five-digits &middot; program MultCircuitV3 &middot; 22,166,060 parameters</div>
+  </div>
+  <div class="eq"><span class="k">true</span>89984 &times; 48898 = <span class="ok">4400037632</span></div>
+  <div class="eq"><span class="k">float32</span>89984 &times; 48898 = <span class="no">4300037632</span></div>
+  <div class="eq"><span class="k">float64</span>89984 &times; 48898 = <span class="no">4390037632</span></div>
+  <div class="scroll-x"><div class="digits"><div class="dg lbl"><div class="k">step</div><div class="t">true</div><div class="m">fp32</div><div class="mg">margin</div><div class="m">fp64</div><div class="mg">margin</div></div><div class="dg"><div class="k">1</div><div class="t">4</div><div class="m" title="margin 19.9566">4</div><div class="mg">19.96</div><div class="m" title="margin 19.9566">4</div><div class="mg">19.96</div></div><div class="dg"><div class="k">2</div><div class="t">4</div><div class="m bad" title="margin 1.3107">3</div><div class="mg">1.31</div><div class="m bad" title="margin 1.3509">3</div><div class="mg">1.35</div></div><div class="dg"><div class="k">3</div><div class="t">0</div><div class="m" title="margin 0.0228">0</div><div class="mg">0.02</div><div class="m bad" title="margin 0.0301">9</div><div class="mg">0.03</div></div><div class="dg"><div class="k">4</div><div class="t">0</div><div class="m" title="margin 3.8151">0</div><div class="mg">3.82</div><div class="m" title="margin 3.7625">0</div><div class="mg">3.76</div></div><div class="dg"><div class="k">5</div><div class="t">0</div><div class="m" title="margin 10.405">0</div><div class="mg">10.40</div><div class="m" title="margin 10.373">0</div><div class="mg">10.37</div></div><div class="dg"><div class="k">6</div><div class="t">3</div><div class="m" title="margin 8.5138">3</div><div class="mg">8.51</div><div class="m" title="margin 8.5025">3</div><div class="mg">8.50</div></div><div class="dg"><div class="k">7</div><div class="t">7</div><div class="m" title="margin 10.1894">7</div><div class="mg">10.19</div><div class="m" title="margin 10.197">7</div><div class="mg">10.20</div></div><div class="dg"><div class="k">8</div><div class="t">6</div><div class="m" title="margin 13.0019">6</div><div class="mg">13.00</div><div class="m" title="margin 13.0011">6</div><div class="mg">13.00</div></div><div class="dg"><div class="k">9</div><div class="t">3</div><div class="m" title="margin 16.0564">3</div><div class="mg">16.06</div><div class="m" title="margin 16.0543">3</div><div class="mg">16.05</div></div><div class="dg"><div class="k">10</div><div class="t">2</div><div class="m" title="margin 18.7475">2</div><div class="mg">18.75</div><div class="m" title="margin 18.7471">2</div><div class="mg">18.75</div></div></div></div>
+  <figcaption><b>Figure 1.</b> Both final multiplication snapshots scored 100% on the study's sampled evaluation. A check
+  on 20,000 fresh samples found one failure, this prompt, and both snapshots answer it wrongly in
+  float32 and float64. Each column is one generated digit: the true digit, the decoded digit in each precision, and the
+  margin between the top two logits. The second digit is wrong in both precisions (margins 1.31 and 1.35); in float64
+  the third flips at a margin of 0.03.</figcaption>
+</figure>
+
+<section class="col">
+  <h2>How a proof follows the mechanism</h2>
+  <p>A hand-written program is written for a mechanism: this head copies a digit, these neurons compute a carry. Its
+  correctness proof decomposes the same way, so the work scales with the mechanism, not with the parameter count.
+  Every theorem below is checked by the Lean kernel and depends only on its three standard axioms.</p>
+  <ol class="loop" aria-label="The proof pipeline">
+    <li><b>Export</b>Each float32 parameter becomes the exact rational it denotes, so the Lean constants are the PyTorch weights.</li>
+    <li><b>Specify</b>The answer of the task generator, stated in Lean over every prompt of the task.</li>
+    <li><b>Prove</b>Lemmas about heads, neurons and carries, with quantitative leak and interval bounds.</li>
+    <li><b>Check</b>The Lean kernel checks every step; <code>#print axioms</code> lists only the standard three.</li>
+  </ol>
+</section>
+
+<section class="wide" id="programs">
+  <div class="col">
+    <h2>Seven programs, every input</h2>
+    <p>For addition the specification reads</p>
+    <pre><code>theorem add_correct (A B : Num5) :
+  addModel.generate (prompt A B) 6 = some (answer A B)</code></pre>
+    <p><code>generate</code> is greedy decoding with first-index argmax; <code>prompt</code> and <code>answer</code> are
+    the token sequences of the task generator. Parity and the boolean circuit predict a single token and are stated for
+    that prediction.</p>
+  </div>
+  <div class="scroll-x" style="margin-top:1.4rem">
+    <table class="data">
+      <thead><tr><th>Task</th><th class="num">Params</th><th class="num">Nonzero</th><th>Architecture</th><th class="num">Inputs</th><th class="num">Proof lines</th><th>Theorem</th></tr></thead>
+      <tbody><tr><td class="task">parity</td><td class="num">174</td><td class="num">35</td><td>1 layer, no LN</td><td class="num">2,046</td><td class="num">206</td><td class="mono">parity_correct</td></tr><tr><td class="task">boolean circuit</td><td class="num">5,592</td><td class="num">223</td><td>attn+MLP, 3 MLP-only blocks</td><td class="num">2,592</td><td class="num">463</td><td class="mono">bool_correct</td></tr><tr><td class="task">digit counting</td><td class="num">4,054</td><td class="num">303</td><td>2 layers, 2 heads</td><td class="num">10<sup>11</sup></td><td class="num">641</td><td class="mono">count_correct</td></tr><tr><td class="task">word reversal</td><td class="num">14,893</td><td class="num">357</td><td>1 layer, real LN</td><td class="num">26<sup>9</sup></td><td class="num">516</td><td class="mono">wr_correct</td></tr><tr><td class="task">sort</td><td class="num">4,364</td><td class="num">384</td><td>1 layer, real LN &times;3</td><td class="num">10<sup>5</sup></td><td class="num">990</td><td class="mono">sort_correct</td></tr><tr><td class="task">linear interpolation</td><td class="num">709,104</td><td class="num">10,203</td><td>2 layers, 8 heads</td><td class="num">45,000</td><td class="num">812</td><td class="mono">li_correct</td></tr><tr><td class="task">addition</td><td class="num">1,300,512</td><td class="num">7,449</td><td>3 layers, 10 heads</td><td class="num">10<sup>10</sup></td><td class="num">1,699</td><td class="mono">add_correct</td></tr></tbody>
+    </table>
+  </div>
+  <details class="fold col" style="margin-inline:auto"><summary>Specifications: prompt &rarr; answer, domain</summary>
+    <div class="scroll-x"><table class="data"><thead><tr><th>Task</th><th>Prompt &rarr; answer</th><th>Domain</th></tr></thead><tbody><tr><td class="task">parity</td><td>bits left-padded to 10 with <code>_</code>, then <code>=</code> &rarr; parity of the number of 1s</td><td>1 to 10 bits</td></tr><tr><td class="task">boolean circuit</td><td><i>b</i><sub>0</sub><i>o</i><sub>0</sub>&hellip;<i>o</i><sub>3</sub><i>b</i><sub>4</sub><code>=</code> &rarr; the chain evaluated strictly left to right</td><td>bits; &and;, &or;, &oplus;</td></tr><tr><td class="task">digit counting</td><td><i>d</i><sub>0</sub>&hellip;<i>d</i><sub>9</sub> <i>q</i><code>=</code> &rarr; how many <i>d<sub>i</sub></i> equal <i>q</i>, two digits</td><td>all digit strings</td></tr><tr><td class="task">word reversal</td><td><i>w</i><sub>1</sub><code>_</code><i>w</i><sub>2</sub><code>_</code><i>w</i><sub>3</sub><code>=</code> &rarr; <i>w</i><sub>3</sub><code>_</code><i>w</i><sub>2</sub><code>_</code><i>w</i><sub>1</sub></td><td>three-letter words over 26 letters</td></tr><tr><td class="task">sort</td><td><i>a</i><sub>0</sub>&hellip;<i>a</i><sub>4</sub><code>=</code> &rarr; the digits in ascending order</td><td>all digit strings</td></tr><tr><td class="task">linear interpolation</td><td><i>x</i><sub>1</sub>,<i>y</i><sub>1</sub>;<i>x</i><sub>2</sub>,<i>y</i><sub>2</sub>;<i>x<sub>q</sub></i><code>=</code> &rarr; <i>y</i>(<i>x<sub>q</sub></i>) for <i>y</i>&nbsp;=&nbsp;(<i>m</i>+1)<i>x</i>+<i>b</i>, two digits</td><td>digits <i>x</i><sub>1</sub>&ne;<i>x</i><sub>2</sub>, <i>x<sub>q</sub></i>, <i>b</i>; <i>m</i>&lt;5</td></tr><tr><td class="task">addition</td><td><i>A</i><code>+</code><i>B</i><code>=</code>, five digits each &rarr; <i>A</i>+<i>B</i>, six digits zero-padded</td><td>all digit strings</td></tr></tbody></table></div>
+  </details>
+  <figure class="col" aria-labelledby="pl-title">
+    <div class="fig-head"><div class="fig-title" id="pl-title">Proof length is not proportional to model size</div>
+    <div class="fig-sub">hand-written Lean lines vs. parameters &middot; hover a point</div></div>
+    <div class="chart"><svg viewBox="0 0 720 300" role="img" aria-label="Proof lines against parameter count for the seven programs"><line class="gl" x1="72" x2="696" y1="256.0" y2="256.0"/><text class="tk" x="64" y="259.5" text-anchor="end">0</text><line class="gl" x1="72" x2="696" y1="189.9" y2="189.9"/><text class="tk" x="64" y="193.4" text-anchor="end">500</text><line class="gl" x1="72" x2="696" y1="123.8" y2="123.8"/><text class="tk" x="64" y="127.3" text-anchor="end">1,000</text><line class="gl" x1="72" x2="696" y1="57.7" y2="57.7"/><text class="tk" x="64" y="61.2" text-anchor="end">1,500</text><text class="tk" x="72.0" y="273" text-anchor="middle">100</text><text class="tk" x="210.7" y="273" text-anchor="middle">1k</text><text class="tk" x="349.3" y="273" text-anchor="middle">10k</text><text class="tk" x="488.0" y="273" text-anchor="middle">100k</text><text class="tk" x="626.7" y="273" text-anchor="middle">1M</text><text class="axt" x="384.0" y="292" text-anchor="middle">parameters (log scale)</text><text class="axt" x="12" y="137.0" text-anchor="middle" transform="rotate(-90 12 137.0)">hand-written proof lines</text><g class="hit" data-tip="parity: 174 parameters, 206 proof lines"><circle cx="105.4" cy="228.8" r="12" fill="transparent"/><circle class="pt c1" cx="105.4" cy="228.8" r="5"/></g><text class="lab" x="114.4" y="221.8" text-anchor="start">parity</text><g class="hit" data-tip="boolean circuit: 5,592 parameters, 463 proof lines"><circle cx="314.3" cy="194.8" r="12" fill="transparent"/><circle class="pt c1" cx="314.3" cy="194.8" r="5"/></g><text class="lab" x="314.3" y="215.8" text-anchor="middle">boolean circuit</text><g class="hit" data-tip="digit counting: 4,054 parameters, 641 proof lines"><circle cx="295.0" cy="171.2" r="12" fill="transparent"/><circle class="pt c1" cx="295.0" cy="171.2" r="5"/></g><text class="lab" x="286.0" y="164.2" text-anchor="end">digit counting</text><g class="hit" data-tip="word reversal: 14,893 parameters, 516 proof lines"><circle cx="373.3" cy="187.8" r="12" fill="transparent"/><circle class="pt c1" cx="373.3" cy="187.8" r="5"/></g><text class="lab" x="382.3" y="191.8" text-anchor="start">word reversal</text><g class="hit" data-tip="sort: 4,364 parameters, 990 proof lines"><circle cx="299.4" cy="125.1" r="12" fill="transparent"/><circle class="pt c1" cx="299.4" cy="125.1" r="5"/></g><text class="lab" x="308.4" y="118.1" text-anchor="start">sort</text><g class="hit" data-tip="linear interpolation: 709,104 parameters, 812 proof lines"><circle cx="606.0" cy="148.6" r="12" fill="transparent"/><circle class="pt c1" cx="606.0" cy="148.6" r="5"/></g><text class="lab" x="597.0" y="139.6" text-anchor="end">linear interpolation</text><g class="hit" data-tip="addition: 1,300,512 parameters, 1,699 proof lines"><circle cx="642.5" cy="31.4" r="12" fill="transparent"/><circle class="pt c1" cx="642.5" cy="31.4" r="5"/></g><text class="lab" x="633.5" y="22.4" text-anchor="end">addition</text></svg></div>
+    <figcaption><b>Figure 2.</b> Addition has 1.3M parameters and 1,699 proof lines; sort has 4,364 parameters and 990.
+    Lines include definitions and comments; generated weight modules are excluded.</figcaption>
+  </figure>
+</section>
+
+<section class="col">
+  <h2>A worked example: addition</h2>
+  <p>The snapshot adds two five-digit numbers in three blocks. The proof follows them.</p>
+  <ol class="loop" aria-label="Proof of addition">
+    <li><b>Gather</b>Ten heads copy the ten operand digits into slots; softmax leaks at most &lambda;&nbsp;&le;&nbsp;1/8000 elsewhere.</li>
+    <li><b>Generate, propagate</b>500 AND units relu(A<sub>i</sub>[a]+B<sub>i</sub>[b]&minus;1) give g<sub>i</sub> (a+b&ge;10) and p<sub>i</sub> (a+b=9) within 2&lambda;.</li>
+    <li><b>Carry</b>15 AND units cover the disjoint carry paths; their sum is within 30&lambda; of the carry.</li>
+    <li><b>Emit</b>One unit fires near 1 and writes the digit; all others together contribute at most 1/2.</li>
+  </ol>
+  <p>Induction over the six generation steps gives <code>add_correct</code>.</p>
+
+  <h3>What the audit found</h3>
+  <ul class="plain">
+    <li><b>A snapshot with 100% sampled accuracy can be wrong</b> (Figure 1).</li>
+    <li><b>Correctness can hinge on things outside the weights.</b> Digit counting's tens digit is an exact all-zero tie
+    for counts below ten, decided by first-index argmax; word reversal reads its attention scale from an environment
+    variable (we prove the default, scale 50).</li>
+    <li><b>&ldquo;Zero parameters&rdquo; can be bookkeeping.</b> GCD keeps 7.4M buffer elements outside its parameters.</li>
+    <li><b>Hand-written circuits are not clean.</b> Sort's head puts only 92&ndash;97% of its attention on the input
+    digits, so the proof bounds the leaked mass by interval arithmetic.</li>
+  </ul>
+</section>
+
+<section class="wide" id="graft">
+  <div class="col">
+    <h2>Grafting a circuit into a trained model</h2>
+    <p>The graft appends <i>k</i> residual coordinates to a trained host. Host input matrices get <i>k</i> zero columns,
+    so the host never reads the circuit. Host output matrices get <i>k</i> copies of their mean row, so the new
+    coordinates hold the host's running mean plus the circuit's own state. Every LayerNorm is compensated:
+    &gamma;&nbsp;&rarr;&nbsp;&gamma;&radic;(D/(D+k)) and &epsilon;&nbsp;&rarr;&nbsp;(D&epsilon;&minus;E)/(D+k). With features of energy
+    E&nbsp;=&nbsp;0 this is the function-preserving width expansion of LEMON; here the new coordinates carry a working
+    circuit whose energy the compensation absorbs.</p>
+  </div>
+  <figure class="exhibit" aria-labelledby="g-title">
+    <div class="fig-head"><div class="fig-title" id="g-title">The construction and what is proved</div>
+    <div class="fig-sub">Figure 1 of the paper</div></div>
+    <img class="figimg" src="figure1_overview.png" alt="(a) proving hand-written programs; (b) grafting a circuit into a host; (c) the proved instances">
+  </figure>
+  <div class="col">
+    <p>For any host in the formalised pre-LayerNorm semantics with positive width and LayerNorm &epsilon;, on prompts
+    within the context length, and for circuits whose features are zero-sum with constant energy E:</p>
+    <div class="thm"><span class="name">Exact &middot; graft_offtrigger</span>An idle circuit with positive circuit
+    LayerNorm &epsilon; leaves every logit exactly unchanged.</div>
+    <div class="thm"><span class="name">Approximate &middot; graft_offtrigger_approx_at</span>On a prompt whose host
+    variance is at most &sigma;&sup2;, a circuit with zero-sum writes whose readout vanishes and whose final energy stays in
+    [E,&nbsp;E+&Delta;], for every variance profile up to &sigma;&sup2;, moves each logit by at most
+    &eta;<sub>v</sub>(u<sub>i</sub>)&nbsp;=&nbsp;&radic;D&thinsp;||w<sub>v</sub>&thinsp;&#8857;&thinsp;&gamma;<sub>f</sub>||&thinsp;&Delta;&nbsp;/&nbsp;2D(u<sub>i</sub>+&epsilon;<sub>f</sub>).</div>
+    <div class="thm"><span class="name">On trigger &middot; graft_ontrigger</span>If, for every such profile, its final
+    energy is at least E and its margin beats the host gap of every other token, its token wins.</div>
+    <p>The circuit's obligations use the host's weights only through its unembedding, output bias and final LayerNorm,
+    so the proofs quantify over every admissible host and never load one.</p>
+  </div>
+</section>
+
+<section class="wide" id="opt">
+  <div class="col">
+    <h2>Running it in OPT</h2>
+    <p>On top of the graft we prove a multi-token refusal rule, a key gate and a weight watermark. The refusal rule fires
+    on the five-token pattern <code>&nbsp;open the pod bay doors</code> and answers <code>&nbsp;No</code>. Its parameters
+    come from the theorem's conditions, rechecked in 60-digit arithmetic, and the Python construction matches an
+    independent transcription of the Lean definitions on OPT-125m and OPT-1.3B (float64).</p>
+  </div>
+  <div class="scroll-x" style="margin-top:1.4rem">
+    <table class="data">
+      <thead><tr><th>Host</th><th>Precision</th><th class="num">max |&Delta;logit|</th><th class="num">&rho;</th><th class="num">Agreement</th><th class="num">Refusal</th><th class="num">8-step gen.</th></tr></thead>
+      <tbody><tr><td class="task">OPT-1.3B</td><td class="mono">fp32</td><td class="num">1.0&times;10<sup>-3</sup></td><td class="num">&ndash;</td><td class="num">100.00%</td><td class="num">1240/1240</td><td class="num">40/40</td></tr><tr><td class="task">OPT-1.3B</td><td class="mono">fp64</td><td class="num">8.4&times;10<sup>-7</sup></td><td class="num">0.0054</td><td class="num">100.00%</td><td class="num">310/310</td><td class="num">10/10</td></tr><tr><td class="task">OPT-2.7B</td><td class="mono">fp32</td><td class="num">2.6&times;10<sup>-4</sup></td><td class="num">&ndash;</td><td class="num">100.00%</td><td class="num">1240/1240</td><td class="num">40/40</td></tr><tr><td class="task">OPT-6.7B</td><td class="mono">fp32</td><td class="num">1.5&times;10<sup>-4</sup></td><td class="num">&ndash;</td><td class="num">100.00%</td><td class="num">2480/2480</td><td class="num">80/80</td></tr><tr><td class="task">OPT-6.7B</td><td class="mono">fp64</td><td class="num">8.9&times;10<sup>-8</sup></td><td class="num">0.0028</td><td class="num">100.00%</td><td class="num">310/310</td><td class="num">10/10</td></tr><tr><td class="task">OPT-6.7B</td><td class="mono">fp16</td><td class="num">0.34</td><td class="num">&ndash;</td><td class="num">99.75%</td><td class="num">2480/2480</td><td class="num">80/80</td></tr></tbody>
+    </table>
+  </div>
+  <p class="foot col" style="margin-inline:auto">max |&Delta;logit|: largest deviation from the graft's own host over the
+  evaluation windows and probe prompts. &rho;: largest ratio of that deviation to the bound's envelope (float64 only);
+  every token's own bound is at least the envelope / R with R&nbsp;=&nbsp;3.97046, so on OPT-6.7B the deviation is at most
+  1.09% of each token's proved bound. Refusal counts positions: the one completing the pattern and the 30 after it.</p>
+
+  <figure class="col" aria-labelledby="v-title">
+    <div class="fig-head"><div class="fig-title" id="v-title">The variance hypothesis under attack</div>
+    <div class="fig-sub">OPT-1.3B &middot; gradient-guided search &middot; hover a bar</div></div>
+    <div class="chart"><svg viewBox="0 0 720 270" role="img" aria-label="Largest host variance found by the adversarial search against sigma squared"><line class="gl" x1="44" x2="624" y1="224.0" y2="224.0"/><text class="tk" x="36" y="227.5" text-anchor="end">0</text><line class="gl" x1="44" x2="624" y1="171.5" y2="171.5"/><text class="tk" x="36" y="175.0" text-anchor="end">10</text><line class="gl" x1="44" x2="624" y1="119.0" y2="119.0"/><text class="tk" x="36" y="122.5" text-anchor="end">20</text><line class="gl" x1="44" x2="624" y1="66.5" y2="66.5"/><text class="tk" x="36" y="70.0" text-anchor="end">30</text><line class="gl" x1="44" x2="624" y1="14.0" y2="14.0"/><text class="tk" x="36" y="17.5" text-anchor="end">40</text><g class="hit" data-tip="8-token prefix, restart 0: max variance 25.10, 70.5% of sigma squared; refuses"><rect x="46.0" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M46.0,224.0 V95.2 q0,-3 3,-3 H87.3 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="8-token prefix, restart 1: max variance 26.18, 73.5% of sigma squared; refuses"><rect x="94.3" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M94.3,224.0 V89.6 q0,-3 3,-3 H135.7 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="8-token prefix, restart 2: max variance 24.68, 69.3% of sigma squared; refuses"><rect x="142.7" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M142.7,224.0 V97.5 q0,-3 3,-3 H184.0 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="8-token prefix, restart 3: max variance 23.99, 67.4% of sigma squared; refuses"><rect x="191.0" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M191.0,224.0 V101.0 q0,-3 3,-3 H232.3 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="32-token prefix, restart 0: max variance 27.27, 76.6% of sigma squared; refuses"><rect x="239.3" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M239.3,224.0 V83.8 q0,-3 3,-3 H280.7 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="32-token prefix, restart 1: max variance 25.24, 70.9% of sigma squared; refuses"><rect x="287.7" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M287.7,224.0 V94.5 q0,-3 3,-3 H329.0 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="32-token prefix, restart 2: max variance 28.74, 80.7% of sigma squared; refuses"><rect x="336.0" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M336.0,224.0 V76.1 q0,-3 3,-3 H377.3 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="32-token prefix, restart 3: max variance 30.33, 85.2% of sigma squared; refuses"><rect x="384.3" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M384.3,224.0 V67.8 q0,-3 3,-3 H425.7 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="128-token prefix, restart 0: max variance 29.33, 82.4% of sigma squared; refuses"><rect x="432.7" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M432.7,224.0 V73.0 q0,-3 3,-3 H474.0 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="128-token prefix, restart 1: max variance 27.89, 78.3% of sigma squared; refuses"><rect x="481.0" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M481.0,224.0 V80.6 q0,-3 3,-3 H522.3 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="128-token prefix, restart 2: max variance 30.11, 84.5% of sigma squared; refuses"><rect x="529.3" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M529.3,224.0 V68.9 q0,-3 3,-3 H570.7 q3,0 3,3 V224.0 Z"/></g><g class="hit" data-tip="128-token prefix, restart 3: max variance 34.81, 97.8% of sigma squared; refuses"><rect x="577.7" y="14" width="44.3" height="210" fill="transparent"/><path class="bar c1" d="M577.7,224.0 V44.2 q0,-3 3,-3 H619.0 q3,0 3,3 V224.0 Z"/></g><text class="tk" x="140.7" y="241" text-anchor="middle">8-token prefix</text><text class="tk" x="334.0" y="241" text-anchor="middle">32-token prefix</text><text class="tk" x="527.3" y="241" text-anchor="middle">128-token prefix</text><line class="ax" x1="44" x2="624" y1="224.0" y2="224.0"/><line class="refl" x1="44" x2="624" y1="37.0" y2="37.0"/><text class="lab" x="630" y="40.5">&sigma;&sup2; = 35.6</text><text class="axt" x="334.0" y="262" text-anchor="middle">12 searched trigger prompts, 4 restarts per prefix length</text></svg></div>
+    <figcaption><b>Figure 3.</b> The approximate and on-trigger theorems need the host variance at every position to be
+    at most &sigma;&sup2;, set to twice the calibration maximum. A search that maximises the variance of trigger prompts
+    reaches 34.81, 97.8% of &sigma;&sup2;; all twelve prompts still refuse. &sigma;&sup2; is a
+    hypothesis about the prompt, which a deployment can monitor with one variance per position.</figcaption>
+    <details class="fold"><summary>Table view</summary><div class="scroll-x"><table class="data"><thead><tr><th class="num">Prefix</th><th class="num">Restart</th><th class="num">Max variance</th><th class="num">of &sigma;&sup2;</th></tr></thead><tbody><tr><td class="num">8</td><td class="num">0</td><td class="num">25.10</td><td class="num">70.5%</td></tr><tr><td class="num">8</td><td class="num">1</td><td class="num">26.18</td><td class="num">73.5%</td></tr><tr><td class="num">8</td><td class="num">2</td><td class="num">24.68</td><td class="num">69.3%</td></tr><tr><td class="num">8</td><td class="num">3</td><td class="num">23.99</td><td class="num">67.4%</td></tr><tr><td class="num">32</td><td class="num">0</td><td class="num">27.27</td><td class="num">76.6%</td></tr><tr><td class="num">32</td><td class="num">1</td><td class="num">25.24</td><td class="num">70.9%</td></tr><tr><td class="num">32</td><td class="num">2</td><td class="num">28.74</td><td class="num">80.7%</td></tr><tr><td class="num">32</td><td class="num">3</td><td class="num">30.33</td><td class="num">85.2%</td></tr><tr><td class="num">128</td><td class="num">0</td><td class="num">29.33</td><td class="num">82.4%</td></tr><tr><td class="num">128</td><td class="num">1</td><td class="num">27.89</td><td class="num">78.3%</td></tr><tr><td class="num">128</td><td class="num">2</td><td class="num">30.11</td><td class="num">84.5%</td></tr><tr><td class="num">128</td><td class="num">3</td><td class="num">34.81</td><td class="num">97.8%</td></tr></tbody></table></div></details>
+  </figure>
+
+  <figure class="col" aria-labelledby="d-title">
+    <div class="fig-head"><div class="fig-title" id="d-title">Deployment transforms</div>
+    <div class="fig-sub">OPT-1.3B &middot; 20,480 non-trigger positions</div></div>
+    <div class="chart minw scroll-x"><svg viewBox="0 0 720 314" role="img" aria-label="Agreement with the original host under deployment transforms"><line class="gl" x1="150.0" x2="150.0" y1="28" y2="274"/><text class="tk" x="150.0" y="290" text-anchor="middle">50%</text><line class="gl" x1="251.2" x2="251.2" y1="28" y2="274"/><text class="tk" x="251.2" y="290" text-anchor="middle">60%</text><line class="gl" x1="352.4" x2="352.4" y1="28" y2="274"/><text class="tk" x="352.4" y="290" text-anchor="middle">70%</text><line class="gl" x1="453.6" x2="453.6" y1="28" y2="274"/><text class="tk" x="453.6" y="290" text-anchor="middle">80%</text><line class="gl" x1="554.8" x2="554.8" y1="28" y2="274"/><text class="tk" x="554.8" y="290" text-anchor="middle">90%</text><line class="gl" x1="656.0" x2="656.0" y1="28" y2="274"/><text class="tk" x="656.0" y="290" text-anchor="middle">100%</text><text class="axt" x="403.0" y="308" text-anchor="middle">greedy-token agreement with the original float32 host</text><circle class="from" cx="154" cy="13" r="6.5"/><text class="lab" x="164" y="17">host alone, transformed</text><circle class="pt c1" cx="340" cy="13" r="4.5"/><text class="lab" x="350" y="17">graft, transformed</text><text class="rowlab" x="138" y="52.5" text-anchor="end">fp32 (none)</text><line class="db" x1="656.0" x2="656.0" y1="49.0" y2="49.0"/><g class="hit" data-tip="fp32 (none): graft 100.00%, host alone 100.00%, refusal 1240/1240"><rect x="150" y="34.0" width="506" height="30" fill="transparent"/><circle class="from" cx="656.0" cy="49.0" r="6.5"/><circle class="pt c1" cx="656.0" cy="49.0" r="4"/></g><text class="lab" x="664" y="52.5">100.0%</text><text class="rowlab" x="138" y="82.5" text-anchor="end">float16</text><line class="db" x1="651.6" x2="651.7" y1="79.0" y2="79.0"/><g class="hit" data-tip="float16: graft 99.57%, host alone 99.56%, refusal 1240/1240"><rect x="150" y="64.0" width="506" height="30" fill="transparent"/><circle class="from" cx="651.6" cy="79.0" r="6.5"/><circle class="pt c1" cx="651.7" cy="79.0" r="4"/></g><text class="lab" x="664" y="82.5">99.6%</text><text class="rowlab" x="138" y="112.5" text-anchor="end">bfloat16</text><line class="db" x1="614.3" x2="619.3" y1="109.0" y2="109.0"/><g class="hit" data-tip="bfloat16: graft 95.88%, host alone 96.38%, refusal 1240/1240"><rect x="150" y="94.0" width="506" height="30" fill="transparent"/><circle class="from" cx="619.3" cy="109.0" r="6.5"/><circle class="pt c1" cx="614.3" cy="109.0" r="4"/></g><text class="lab" x="664" y="112.5">95.9%</text><text class="rowlab" x="138" y="142.5" text-anchor="end">TF32</text><line class="db" x1="654.8" x2="655.0" y1="139.0" y2="139.0"/><g class="hit" data-tip="TF32: graft 99.88%, host alone 99.90%, refusal 1240/1240"><rect x="150" y="124.0" width="506" height="30" fill="transparent"/><circle class="from" cx="655.0" cy="139.0" r="6.5"/><circle class="pt c1" cx="654.8" cy="139.0" r="4"/></g><text class="lab" x="664" y="142.5">99.9%</text><text class="rowlab" x="138" y="172.5" text-anchor="end">int8, per row</text><line class="db" x1="634.5" x2="634.6" y1="169.0" y2="169.0"/><g class="hit" data-tip="int8, per row: graft 97.87%, host alone 97.88%, refusal 1240/1240"><rect x="150" y="154.0" width="506" height="30" fill="transparent"/><circle class="from" cx="634.6" cy="169.0" r="6.5"/><circle class="pt c1" cx="634.5" cy="169.0" r="4"/></g><text class="lab" x="664" y="172.5">97.9%</text><text class="rowlab" x="138" y="202.5" text-anchor="end">int4, per row</text><line class="db" x1="212.6" x2="212.6" y1="199.0" y2="199.0"/><g class="hit" data-tip="int4, per row: graft 56.18%, host alone 56.18%, refusal 1240/1240"><rect x="150" y="184.0" width="506" height="30" fill="transparent"/><circle class="from" cx="212.6" cy="199.0" r="6.5"/><circle class="pt c1" cx="212.6" cy="199.0" r="4"/></g><text class="lab" x="664" y="202.5">56.2%</text><text class="rowlab" x="138" y="232.5" text-anchor="end">int4, groups of 128</text><line class="db" x1="435.4" x2="436.5" y1="229.0" y2="229.0"/><g class="hit" data-tip="int4, groups of 128: graft 78.20%, host alone 78.31%, refusal 1240/1240"><rect x="150" y="214.0" width="506" height="30" fill="transparent"/><circle class="from" cx="436.5" cy="229.0" r="6.5"/><circle class="pt c1" cx="435.4" cy="229.0" r="4"/></g><text class="lab" x="664" y="232.5">78.2%</text><text class="rowlab" x="138" y="262.5" text-anchor="end">prune 30%</text><line class="db" x1="285.5" x2="436.1" y1="259.0" y2="259.0"/><g class="hit" data-tip="prune 30%: graft 78.27%, host alone 63.39%, refusal 1240/1240"><rect x="150" y="244.0" width="506" height="30" fill="transparent"/><circle class="from" cx="285.5" cy="259.0" r="6.5"/><circle class="pt c1" cx="436.1" cy="259.0" r="4"/></g><text class="lab" x="664" y="262.5">78.3%</text></svg></div>
+    <figcaption><b>Figure 4.</b> Hollow: the transform applied to the host alone; filled: the transformed graft. The circuit
+    refuses on every trigger position (1240/1240) under every transform; except under pruning, the graft's agreement is
+    within 0.5 points of the transformed host's own.</figcaption>
+    <details class="fold"><summary>Table view</summary><div class="scroll-x"><table class="data"><thead><tr><th>Transform</th><th class="num">Graft</th><th class="num">Host alone</th><th class="num">Refusal</th></tr></thead><tbody><tr><td class="task">fp32 (none)</td><td class="num">100.00%</td><td class="num">100.00%</td><td class="num">1240/1240</td></tr><tr><td class="task">float16</td><td class="num">99.57%</td><td class="num">99.56%</td><td class="num">1240/1240</td></tr><tr><td class="task">bfloat16</td><td class="num">95.88%</td><td class="num">96.38%</td><td class="num">1240/1240</td></tr><tr><td class="task">TF32</td><td class="num">99.88%</td><td class="num">99.90%</td><td class="num">1240/1240</td></tr><tr><td class="task">int8, per row</td><td class="num">97.87%</td><td class="num">97.88%</td><td class="num">1240/1240</td></tr><tr><td class="task">int4, per row</td><td class="num">56.18%</td><td class="num">56.18%</td><td class="num">1240/1240</td></tr><tr><td class="task">int4, groups of 128</td><td class="num">78.20%</td><td class="num">78.31%</td><td class="num">1240/1240</td></tr><tr><td class="task">prune 30%</td><td class="num">78.27%</td><td class="num">63.39%</td><td class="num">1240/1240</td></tr></tbody></table></div></details>
+  </figure>
+</section>
+
+<section class="col limits" id="limits">
+  <h2>What the theorems do not say</h2>
+  <ul class="plain">
+    <li><b>Real numbers, not floats.</b> The theorems are about the exact real-valued weights; the stored tensors round
+    them and execution rounds again. Floating point is measured, not proved: a large common offset on every coordinate
+    breaks the circuit in float32 (it refuses at every tested offset up to 10<sup>5</sup> and stops at 10<sup>6</sup>).</li>
+    <li><b>Modified weights void the guarantees.</b> Quantization, pruning and fine-tuning break the construction;
+    grafting the circuit again into the changed host restores it.</li>
+    <li><b>No hiding.</b> The key gate stores its key in plain text and the watermark can be read and removed by anyone
+    who knows the construction. The point is that an auditor can state and check what the circuit does.</li>
+  </ul>
+</section>
+
+<section class="col">
+  <details class="fold big"><summary>Reproduce</summary>
+<pre><code>./regenerate_weights.sh             # re-export the seven snapshots, check SHA-256
+cd lean &amp;&amp; lake exe cache get &amp;&amp; lake build
+lake env lean Checks.lean           # axioms of the main theorems
+python3 scripts/check_conditions_exact.py graft/results/*_final.json</code></pre>
+    <p>The Lean weight modules of the seven snapshots are derived from the study's repository, which has no license, so
+    they are not redistributed; <code>regenerate_weights.sh</code> rebuilds them from that repository at a pinned commit
+    and checks them against recorded checksums. Lean sources of the seven proofs:</p>
+    <ul class="plain"><li><span class="mono">parity</span>: <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Parity.lean"><code>lean/VWC/Parity.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Spec.lean"><code>lean/VWC/Spec.lean</code></a></li><li><span class="mono">boolean circuit</span>: <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/BoolCircuit.lean"><code>lean/VWC/Tasks/BoolCircuit.lean</code></a></li><li><span class="mono">digit counting</span>: <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/CountCircuit.lean"><code>lean/VWC/Tasks/CountCircuit.lean</code></a></li><li><span class="mono">word reversal</span>: <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/WordRev.lean"><code>lean/VWC/Tasks/WordRev.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/WordRevStruct.lean"><code>lean/VWC/Tasks/WordRevStruct.lean</code></a></li><li><span class="mono">sort</span>: <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/Sort.lean"><code>lean/VWC/Tasks/Sort.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/SortStruct.lean"><code>lean/VWC/Tasks/SortStruct.lean</code></a></li><li><span class="mono">linear interpolation</span>: <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/LinInterp.lean"><code>lean/VWC/Tasks/LinInterp.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/LiStruct.lean"><code>lean/VWC/Tasks/LiStruct.lean</code></a></li><li><span class="mono">addition</span>: <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/Addition.lean"><code>lean/VWC/Tasks/Addition.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/AddArith.lean"><code>lean/VWC/Tasks/AddArith.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/AddS0.lean"><code>lean/VWC/Tasks/AddS0.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/AddS1.lean"><code>lean/VWC/Tasks/AddS1.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/AddS2.lean"><code>lean/VWC/Tasks/AddS2.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/AddS3.lean"><code>lean/VWC/Tasks/AddS3.lean</code></a>, <a href="https://github.com/lemonadesaltbagel/verified-by-construction/blob/main/lean/VWC/Tasks/AddS4.lean"><code>lean/VWC/Tasks/AddS4.lean</code></a></li></ul>
+  </details>
+  <details class="fold big"><summary>Cite</summary>
+<pre><code>@misc{huang2026verified,
+  title     = {Verified by Construction: Machine-Checked Proofs for Hand-Written
+               Transformer Circuits and Their Composition},
+  author    = {Huang, Xintian},
+  year      = {2026},
+  publisher = {Zenodo},
+  note      = {Preprint}
+}</code></pre>
+  </details>
+  <p class="foot" style="margin-top:3rem">Built from the artifact's result files by <code>scripts/build_site.py</code>.
+  The hand-written programs come from the <a href="https://csinva.io/weight-space-programming-autoresearch/analyze/toy_examples/report.html">weight-space programming study</a>.</p>
+</section>
+
+</article>
+</div>
+<div id="tip" role="tooltip"></div>
+<script>
+(function() {
+  var tip = document.getElementById('tip');
+  document.querySelectorAll('.hit').forEach(function(el) {
+    el.addEventListener('mousemove', function(e) {
+      tip.textContent = el.getAttribute('data-tip');
+      tip.style.left = Math.min(e.clientX + 12, window.innerWidth - 300) + 'px';
+      tip.style.top = (e.clientY + 14) + 'px';
+      tip.style.opacity = 1;
+    });
+    el.addEventListener('mouseleave', function() { tip.style.opacity = 0; });
+  });
+})();
+</script>
+</body>
+</html>

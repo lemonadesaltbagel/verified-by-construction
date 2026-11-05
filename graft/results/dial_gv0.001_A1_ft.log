@@ -1,0 +1,98 @@
+[facebook/opt-1.3b] D=2048 layers=24 heads=32 L=2048 V=50272 device=cuda circuit=pattern variant=graft
+fidelity: own fp32 forward vs HF: max |dlogit| = 1.72e-04
+host pass done (10s): final-residual var in [0.964, 16.80]; Host.gap max G = 174.9
+circuit: m=5, n=11, k=166, E=1.340; sigma2=33.6; Lg=5.627e+04; hypotheses {'L_le_2n': True, 'h1': True, 'h3': True, 'h4': True, 'h5': True, 'h6': True}; eta bound 3.39e-04
+ft step 0: ppl_graft=22.016644634050063, own_host_max_dlogit=0.0005452632904052734, own_host_argmax_agree=0.99990234375, off_max_dlogit=0.0005042552947998047, off_argmax_agree=0.99990234375, refusal_rate=1.0, false_refusal_positions=0/10240, zero_cols_max=0.0, mean_rows_max_dev=0.0
+ft step 1: ppl_graft=65.72895172242397, own_host_max_dlogit=2918.01953125, own_host_argmax_agree=0.9474609375, off_max_dlogit=2818.97021484375, off_argmax_agree=0.856640625, refusal_rate=0.0, false_refusal_positions=0/10240, zero_cols_max=9.999994290410541e-06, mean_rows_max_dev=1.9988830899819732e-05
+ft step 10: ppl_graft=126.95053722238255, own_host_max_dlogit=31981.033203125, own_host_argmax_agree=0.9181640625, off_max_dlogit=31980.537109375, off_argmax_agree=0.77490234375, refusal_rate=0.0, false_refusal_positions=0/10240, zero_cols_max=0.0001000224583549425, mean_rows_max_dev=0.00012348650489002466
+ft step 100: ppl_graft=694.1660381594767, own_host_max_dlogit=45904.24609375, own_host_argmax_agree=0.91005859375, off_max_dlogit=44339.89453125, off_argmax_agree=0.6802734375, refusal_rate=0.0, false_refusal_positions=0/10240, zero_cols_max=0.0010835387511178851, mean_rows_max_dev=0.000968139385804534
+{
+ "model": "facebook/opt-1.3b",
+ "dtype": "float32",
+ "D": 2048,
+ "layers": 24,
+ "heads": 32,
+ "L": 2048,
+ "V": 50272,
+ "device": "cuda",
+ "circuit": "pattern",
+ "variant": "graft",
+ "fidelity_max_dlogit": 0.0001723170280456543,
+ "host_var_min": 0.9637725353240967,
+ "host_var_max": 16.798952102661133,
+ "c3": 135585.02358786575,
+ "lam3": 0.009999999999999986,
+ "flag_gain": 1.0,
+ "gv": 0.001,
+ "eta_at_min_observed_var": 3.521238653265757e-09,
+ "pattern": [
+  490,
+  5,
+  9371,
+  11751,
+  4259
+ ],
+ "refuse": 440,
+ "m": 5,
+ "n_bits": 11,
+ "k": 166,
+ "E": 1.3400000000000003,
+ "sigma2": 33.597904205322266,
+ "G": 174.88339233398438,
+ "Lg": 56268.87166036803,
+ "cs": 59771.57554542866,
+ "Wa": 911520.0846466466,
+ "Wb": 114.27531662214348,
+ "tau": 0.10687544737799903,
+ "lam": 2.0753204253715466e-05,
+ "Delta_c": 8.6484375e-08,
+ "eta_bound": 0.00033937083167256786,
+ "hypotheses": {
+  "L_le_2n": true,
+  "h1": true,
+  "h3": true,
+  "h4": true,
+  "h5": true,
+  "h6": true
+ },
+ "off_windows": 20,
+ "off_tokens": 10220,
+ "off_max_dlogit": 0.0005042552947998047,
+ "off_argmax_agree": 0.99990234375,
+ "argmax_flips": [
+  {
+   "window": 7,
+   "pos": 500,
+   "host_top2_margin": 5.53131103515625e-05
+  }
+ ],
+ "n_argmax_flips": 1,
+ "min_host_margin": 5.53131103515625e-05,
+ "own_host_max_dlogit": 0.0005452632904052734,
+ "own_host_argmax_agree": 0.99990234375,
+ "own_host_ppl": 22.016641036722316,
+ "bound_ratio_max": 987772.741671848,
+ "nonfinite_logit_positions": 0,
+ "near_prompts": 7,
+ "near_max_dlogit": 0.00019359588623046875,
+ "near_argmax_agree": 1.0,
+ "ppl_host": 22.016641036722316,
+ "ppl_graft": 22.016644634050063,
+ "ppl_rel_change": 1.6339130667952793e-07,
+ "diag_trig_cbit_min": 0.9999995678663254,
+ "diag_trig_match_mean": 1.0000000223517418,
+ "diag_trig_flag_mean": 0.3465908230282366,
+ "trig_prompts": 20,
+ "refusal_positions": "620/620",
+ "refusal_rate": 1.0,
+ "false_refusal_positions": "0/10240",
+ "host_refusal_token_positions": 8,
+ "false_refusal_vs_variant_host": null,
+ "generation_all_refusal": "20/20",
+ "zero_cols_max": 0.0,
+ "mean_rows_max_dev": 0.0,
+ "var_le_sigma2_all": true,
+ "max_abs_circuit_weight": 455760.03125,
+ "seconds": 20.537199020385742,
+ "gpu_peak_GB": 29.40996217727661
+}

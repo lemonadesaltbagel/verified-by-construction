@@ -1,0 +1,43 @@
+{
+ "meta": {
+  "snapshot": "runs/parity-upto10-bits-may15-run1/interpretable_transformers_lib/ParityFloorSubD3F9.py",
+  "model_shorthand_name": "ParityFloorSubD3F9",
+  "vocab": [
+   "0",
+   "1",
+   "=",
+   "_"
+  ],
+  "config": {
+   "vocab_size": 4,
+   "max_seq_len": 16,
+   "d_model": 3,
+   "n_heads": 1,
+   "n_layers": 1,
+   "d_ff": 9
+  },
+  "n_params": 174,
+  "n_nonzero": 35,
+  "layout": "PyTorch nn.Linear weight is (out_features, in_features); y = x @ W.T + b",
+  "layernorm": "ln1, ln2, final_ln are nn.Identity"
+ },
+ "canonical_2046": {
+  "n": 2046,
+  "n_correct": 2046,
+  "min_margin32": 0.5,
+  "min_margin64": 0.5,
+  "max_abs_diff_32_vs_64": 0.0
+ },
+ "extended_3pow10": {
+  "n": 59049,
+  "n_correct": 59049,
+  "min_margin32": 0.5,
+  "min_margin64": 0.5,
+  "max_abs_diff_32_vs_64": 0.0
+ },
+ "fresh_seed_eval_accuracy": {
+  "seed1_n2000": 1.0,
+  "seed12345_n2000": 1.0
+ },
+ "torch_version": "2.10.0+cu128"
+}

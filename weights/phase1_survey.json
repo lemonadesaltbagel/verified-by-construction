@@ -1,0 +1,469 @@
+{
+ "addition-five-digits": {
+  "run": "addition-five-digits-may15-run1",
+  "n_successful_snapshots": 3,
+  "chosen_snapshot": "CompactCarryLookahead",
+  "min_param_snapshot": "CompactCarryLookahead",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "Embedding": 2,
+   "ModuleList": 1,
+   "Block": 3,
+   "CausalSelfAttention": 3,
+   "Linear": 19,
+   "MLP": 3
+  },
+  "real_layernorms": [],
+  "n_params": 1300512,
+  "n_nonzero": 7449,
+  "n_buffer_elems": 0,
+  "config": {
+   "d_model": 160,
+   "n_heads": 10,
+   "n_layers": 3,
+   "d_ff": 1024,
+   "max_seq_len": 18,
+   "vocab_size": 12
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "MLP",
+   "SimpleTransformer"
+  ],
+  "prompt_len": 12,
+  "answer_len": 6,
+  "check": "random sample (seed 2026)",
+  "n_checked": 20000,
+  "n_correct": 20000,
+  "failures": [],
+  "seconds": 28.8
+ },
+ "boolean-circuit-5-bits": {
+  "run": "boolean-circuit-5-bits-may15-run1",
+  "n_successful_snapshots": 10,
+  "chosen_snapshot": "ChainedReductionV10_noWo",
+  "min_param_snapshot": "ChainedReductionV10_noWo",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "Embedding": 2,
+   "ModuleList": 1,
+   "Block": 1,
+   "Identity": 6,
+   "CausalSelfAttention": 1,
+   "Linear": 12,
+   "MLP": 4,
+   "MLPOnlyBlock": 3
+  },
+  "real_layernorms": [],
+  "n_params": 5592,
+  "n_nonzero": 223,
+  "n_buffer_elems": 0,
+  "config": {
+   "d_model": 36,
+   "n_heads": 9,
+   "n_layers": 4,
+   "d_ff": 3,
+   "max_seq_len": 11,
+   "vocab_size": 6
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "MLP",
+   "MLPOnlyBlock",
+   "SimpleTransformer"
+  ],
+  "prompt_len": 10,
+  "answer_len": 1,
+  "check": "exhaustive",
+  "n_checked": 2592,
+  "n_correct": 2592,
+  "failures": [],
+  "seconds": 0.0
+ },
+ "decimal-to-binary-8bit": {
+  "run": "decimal-to-binary-8bit-may15-run1",
+  "n_successful_snapshots": 20,
+  "chosen_snapshot": "HandbuiltDec2Bin_v20_final5k",
+  "min_param_snapshot": "HandbuiltDec2Bin_v15_zeroparams",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "_OneHotEmbedding": 2,
+   "ModuleList": 1,
+   "Block": 8,
+   "Identity": 17,
+   "_DigitPlaceAttn": 1,
+   "_SparseBitMLP": 8,
+   "_ZeroAttn": 7,
+   "_SparseHead": 1
+  },
+  "real_layernorms": [],
+  "n_params": 0,
+  "n_nonzero": 0,
+  "n_buffer_elems": 253,
+  "config": {
+   "d_model": 26,
+   "n_heads": 1,
+   "n_layers": 8,
+   "d_ff": 4,
+   "max_seq_len": 12,
+   "vocab_size": 11
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "MLP",
+   "SimpleTransformer",
+   "_DigitPlaceAttn",
+   "_OneHotEmbedding",
+   "_ScalarLaneAttn",
+   "_SparseBitMLP",
+   "_SparseHead",
+   "_ZeroAttn"
+  ],
+  "prompt_len": 4,
+  "answer_len": 8,
+  "check": "exhaustive",
+  "n_checked": 256,
+  "n_correct": 256,
+  "failures": [],
+  "seconds": 0.0
+ },
+ "digit-counting-10": {
+  "run": "digit-counting-10-may15-run1",
+  "n_successful_snapshots": 13,
+  "chosen_snapshot": "CountCircuitV13",
+  "min_param_snapshot": "CountCircuitV13",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "Embedding": 2,
+   "ModuleList": 1,
+   "Block": 2,
+   "CausalSelfAttention": 1,
+   "Linear": 9,
+   "MLP": 2
+  },
+  "real_layernorms": [],
+  "n_params": 4054,
+  "n_nonzero": 303,
+  "n_buffer_elems": 0,
+  "config": {
+   "d_model": 32,
+   "n_heads": 2,
+   "n_layers": 2,
+   "d_ff": [
+    10,
+    12
+   ],
+   "max_seq_len": 14,
+   "vocab_size": 11
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "MLP",
+   "SimpleTransformer"
+  ],
+  "prompt_len": 12,
+  "answer_len": 2,
+  "check": "random sample (seed 2026)",
+  "n_checked": 20000,
+  "n_correct": 20000,
+  "failures": [],
+  "seconds": 0.5
+ },
+ "gcd-three-digits": {
+  "run": "gcd-three-digits-may15-run1",
+  "n_successful_snapshots": 17,
+  "chosen_snapshot": "GCDDocumented",
+  "min_param_snapshot": "GCDZeroParams",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "HardcodedEmbedding": 2,
+   "ModuleList": 1,
+   "Block": 2,
+   "Identity": 5,
+   "HardcodedAttention": 1,
+   "ScalarLookupMLP": 1,
+   "_ZeroAttention": 1,
+   "HardcodedMLP": 1,
+   "HardcodedLinear": 1
+  },
+  "real_layernorms": [],
+  "n_params": 0,
+  "n_nonzero": 0,
+  "n_buffer_elems": 7384977,
+  "config": {
+   "d_model": 66,
+   "n_heads": 6,
+   "n_layers": 2,
+   "d_ff": [
+    998001,
+    30
+   ],
+   "max_seq_len": 11,
+   "vocab_size": 12
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "HardcodedAttention",
+   "HardcodedEmbedding",
+   "HardcodedLinear",
+   "HardcodedMLP",
+   "MLP",
+   "ScalarLookupMLP",
+   "SimpleTransformer",
+   "_ZeroAttention"
+  ],
+  "prompt_len": 8,
+  "answer_len": 3,
+  "check": "exhaustive",
+  "error": "RuntimeError(\"[enforce fail at alloc_cpu.cpp:127] err == 0. DefaultCPUAllocator: can't allocate memory: you tried to allocate 130809987072 bytes. Error code 12 (Cannot allocate memory)\")",
+  "seconds": 1.5
+ },
+ "linear-interpolation-two-points": {
+  "run": "linear-interpolation-two-points-may15-run1",
+  "n_successful_snapshots": 4,
+  "chosen_snapshot": "LinInterpTwoPointAND_v4",
+  "min_param_snapshot": "LinInterpTwoPointAND_v4",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "Embedding": 2,
+   "ModuleList": 1,
+   "Block": 2,
+   "Identity": 5,
+   "CausalSelfAttention": 1,
+   "Linear": 9,
+   "MLP": 2
+  },
+  "real_layernorms": [],
+  "n_params": 709104,
+  "n_nonzero": 10203,
+  "n_buffer_elems": 0,
+  "config": {
+   "d_model": 152,
+   "n_heads": 8,
+   "n_layers": 2,
+   "d_ff": 1000,
+   "max_seq_len": 16,
+   "vocab_size": 13
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "MLP",
+   "SimpleTransformer"
+  ],
+  "prompt_len": 12,
+  "answer_len": 2,
+  "check": "exhaustive",
+  "n_checked": 45000,
+  "n_correct": 45000,
+  "failures": [],
+  "seconds": 8.4
+ },
+ "multiplication-five-digits": {
+  "run": "multiplication-five-digits-may15-run1",
+  "n_successful_snapshots": 2,
+  "chosen_snapshot": "MultCircuitV3",
+  "min_param_snapshot": "MultCircuitV3",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "Embedding": 2,
+   "ModuleList": 1,
+   "Block": 11,
+   "LayerNorm": 23,
+   "CausalSelfAttention": 11,
+   "Linear": 67,
+   "MLP": 11
+  },
+  "real_layernorms": [
+   "blocks.0.ln1",
+   "blocks.0.ln2",
+   "blocks.1.ln1",
+   "blocks.1.ln2",
+   "blocks.2.ln1",
+   "blocks.2.ln2",
+   "blocks.3.ln1",
+   "blocks.3.ln2",
+   "blocks.4.ln1",
+   "blocks.4.ln2",
+   "blocks.5.ln1",
+   "blocks.5.ln2",
+   "blocks.6.ln1",
+   "blocks.6.ln2",
+   "blocks.7.ln1",
+   "blocks.7.ln2",
+   "blocks.8.ln1",
+   "blocks.8.ln2",
+   "blocks.9.ln1",
+   "blocks.9.ln2",
+   "blocks.10.ln1",
+   "blocks.10.ln2",
+   "final_ln"
+  ],
+  "n_params": 22166060,
+  "n_nonzero": 67813,
+  "n_buffer_elems": 0,
+  "config": {
+   "d_model": 320,
+   "n_heads": 10,
+   "n_layers": 11,
+   "d_ff": 2500,
+   "max_seq_len": 22,
+   "vocab_size": 12
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "MLP",
+   "SimpleTransformer"
+  ],
+  "prompt_len": 12,
+  "answer_len": 10,
+  "check": "random sample (seed 2026)",
+  "n_checked": 20000,
+  "n_correct": 19999,
+  "failures": [
+   [
+    "89984*48898=",
+    "4400037632",
+    "4300037632"
+   ]
+  ],
+  "seconds": 558.8
+ },
+ "parity-upto10-bits": {
+  "run": "parity-upto10-bits-may15-run1",
+  "n_successful_snapshots": 4,
+  "chosen_snapshot": "ParityFloorSubD3F9",
+  "min_param_snapshot": "ParityFloorSubD3F9",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "Embedding": 2,
+   "ModuleList": 1,
+   "Block": 1,
+   "Identity": 3,
+   "CausalSelfAttention": 1,
+   "Linear": 7,
+   "MLP": 1
+  },
+  "real_layernorms": [],
+  "n_params": 174,
+  "n_nonzero": 35,
+  "n_buffer_elems": 0,
+  "config": {
+   "d_model": 3,
+   "n_heads": 1,
+   "n_layers": 1,
+   "d_ff": 9,
+   "max_seq_len": 16,
+   "vocab_size": 4
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "MLP",
+   "SimpleTransformer"
+  ],
+  "prompt_len": 11,
+  "answer_len": 1,
+  "check": "exhaustive",
+  "n_checked": 2046,
+  "n_correct": 2046,
+  "failures": [],
+  "seconds": 0.0
+ },
+ "sort-five-digits": {
+  "run": "sort-five-digits-may15-run1",
+  "n_successful_snapshots": 5,
+  "chosen_snapshot": "HistogramCircuit_v5_clean",
+  "min_param_snapshot": "HistogramCircuit_v4_d24_kscalar",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "Embedding": 2,
+   "ModuleList": 1,
+   "Block": 1,
+   "LayerNorm": 3,
+   "CausalSelfAttention": 1,
+   "Linear": 7,
+   "MLP": 1
+  },
+  "real_layernorms": [
+   "blocks.0.ln1",
+   "blocks.0.ln2",
+   "final_ln"
+  ],
+  "n_params": 4364,
+  "n_nonzero": 384,
+  "n_buffer_elems": 0,
+  "config": {
+   "d_model": 24,
+   "n_heads": 1,
+   "n_layers": 1,
+   "d_ff": 20,
+   "max_seq_len": 16,
+   "vocab_size": 11
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "MLP",
+   "SimpleTransformer"
+  ],
+  "prompt_len": 6,
+  "answer_len": 5,
+  "check": "exhaustive",
+  "n_checked": 100000,
+  "n_correct": 100000,
+  "failures": [],
+  "seconds": 1.8
+ },
+ "word-reversal-3x3": {
+  "run": "word-reversal-3x3-may15-run1",
+  "n_successful_snapshots": 23,
+  "chosen_snapshot": "PosRoute_HARD_S200",
+  "min_param_snapshot": "PosRoutingCopyV1",
+  "module_types": {
+   "SimpleTransformer": 1,
+   "Embedding": 2,
+   "ModuleList": 1,
+   "Block": 1,
+   "LayerNorm": 3,
+   "CausalSelfAttention": 1,
+   "Linear": 7,
+   "MLP": 1
+  },
+  "real_layernorms": [
+   "blocks.0.ln1",
+   "blocks.0.ln2",
+   "final_ln"
+  ],
+  "n_params": 14893,
+  "n_nonzero": 357,
+  "n_buffer_elems": 0,
+  "config": {
+   "d_model": 51,
+   "n_heads": 1,
+   "n_layers": 1,
+   "d_ff": 1,
+   "max_seq_len": 23,
+   "vocab_size": 28
+  },
+  "custom_classes": [
+   "Block",
+   "CausalSelfAttention",
+   "MLP",
+   "SimpleTransformer"
+  ],
+  "prompt_len": 12,
+  "answer_len": 11,
+  "check": "random sample (seed 2026)",
+  "n_checked": 20000,
+  "n_correct": 20000,
+  "failures": [],
+  "seconds": 2.1
+ }
+}

@@ -1,0 +1,296 @@
+{
+ "model": "facebook/opt-1.3b",
+ "dtype": "float32",
+ "D": 2048,
+ "layers": 24,
+ "heads": 32,
+ "L": 2048,
+ "V": 50272,
+ "device": "cuda",
+ "circuit": "watermark",
+ "variant": "prune0.3",
+ "fidelity_max_dlogit": 0.00022745132446289062,
+ "m_pairs": 256,
+ "k": 512,
+ "E": 5.120000000000003,
+ "delta": 0.1,
+ "off_windows": 40,
+ "off_tokens": 20440,
+ "off_max_dlogit": 8.245294570922852,
+ "off_argmax_agree": 0.864990234375,
+ "argmax_flips": [
+  {
+   "window": 0,
+   "pos": 1,
+   "host_top2_margin": 0.14637184143066406
+  },
+  {
+   "window": 0,
+   "pos": 5,
+   "host_top2_margin": 1.018153190612793
+  },
+  {
+   "window": 0,
+   "pos": 13,
+   "host_top2_margin": 0.026348114013671875
+  },
+  {
+   "window": 0,
+   "pos": 18,
+   "host_top2_margin": 0.4025287628173828
+  },
+  {
+   "window": 0,
+   "pos": 21,
+   "host_top2_margin": 0.21631145477294922
+  },
+  {
+   "window": 0,
+   "pos": 22,
+   "host_top2_margin": 0.12688446044921875
+  },
+  {
+   "window": 0,
+   "pos": 33,
+   "host_top2_margin": 0.41044044494628906
+  },
+  {
+   "window": 0,
+   "pos": 35,
+   "host_top2_margin": 0.05873680114746094
+  },
+  {
+   "window": 0,
+   "pos": 37,
+   "host_top2_margin": 0.1964883804321289
+  },
+  {
+   "window": 0,
+   "pos": 55,
+   "host_top2_margin": 0.3728666305541992
+  },
+  {
+   "window": 0,
+   "pos": 58,
+   "host_top2_margin": 0.29935264587402344
+  },
+  {
+   "window": 0,
+   "pos": 62,
+   "host_top2_margin": 0.19350051879882812
+  },
+  {
+   "window": 0,
+   "pos": 71,
+   "host_top2_margin": 0.02853870391845703
+  },
+  {
+   "window": 0,
+   "pos": 76,
+   "host_top2_margin": 0.06473922729492188
+  },
+  {
+   "window": 0,
+   "pos": 82,
+   "host_top2_margin": 0.18076229095458984
+  },
+  {
+   "window": 0,
+   "pos": 91,
+   "host_top2_margin": 0.6961479187011719
+  },
+  {
+   "window": 0,
+   "pos": 92,
+   "host_top2_margin": 0.00379180908203125
+  },
+  {
+   "window": 0,
+   "pos": 150,
+   "host_top2_margin": 0.08381175994873047
+  },
+  {
+   "window": 0,
+   "pos": 153,
+   "host_top2_margin": 0.34597110748291016
+  },
+  {
+   "window": 0,
+   "pos": 156,
+   "host_top2_margin": 0.029206275939941406
+  },
+  {
+   "window": 0,
+   "pos": 165,
+   "host_top2_margin": 0.16814231872558594
+  },
+  {
+   "window": 0,
+   "pos": 169,
+   "host_top2_margin": 0.3126077651977539
+  },
+  {
+   "window": 0,
+   "pos": 172,
+   "host_top2_margin": 0.2525482177734375
+  },
+  {
+   "window": 0,
+   "pos": 173,
+   "host_top2_margin": 0.6092796325683594
+  },
+  {
+   "window": 0,
+   "pos": 177,
+   "host_top2_margin": 0.061283111572265625
+  },
+  {
+   "window": 0,
+   "pos": 185,
+   "host_top2_margin": 0.08379650115966797
+  },
+  {
+   "window": 0,
+   "pos": 186,
+   "host_top2_margin": 0.372467041015625
+  },
+  {
+   "window": 0,
+   "pos": 190,
+   "host_top2_margin": 0.0776519775390625
+  },
+  {
+   "window": 0,
+   "pos": 199,
+   "host_top2_margin": 0.4260835647583008
+  },
+  {
+   "window": 0,
+   "pos": 200,
+   "host_top2_margin": 0.0057430267333984375
+  },
+  {
+   "window": 0,
+   "pos": 205,
+   "host_top2_margin": 0.6145734786987305
+  },
+  {
+   "window": 0,
+   "pos": 212,
+   "host_top2_margin": 0.2288684844970703
+  },
+  {
+   "window": 0,
+   "pos": 213,
+   "host_top2_margin": 0.38127803802490234
+  },
+  {
+   "window": 0,
+   "pos": 229,
+   "host_top2_margin": 0.5246667861938477
+  },
+  {
+   "window": 0,
+   "pos": 254,
+   "host_top2_margin": 0.2648887634277344
+  },
+  {
+   "window": 0,
+   "pos": 257,
+   "host_top2_margin": 0.06572628021240234
+  },
+  {
+   "window": 0,
+   "pos": 263,
+   "host_top2_margin": 0.2237558364868164
+  },
+  {
+   "window": 0,
+   "pos": 265,
+   "host_top2_margin": 0.044243812561035156
+  },
+  {
+   "window": 0,
+   "pos": 291,
+   "host_top2_margin": 0.590235710144043
+  },
+  {
+   "window": 0,
+   "pos": 305,
+   "host_top2_margin": 1.0871400833129883
+  },
+  {
+   "window": 0,
+   "pos": 306,
+   "host_top2_margin": 0.004084587097167969
+  },
+  {
+   "window": 0,
+   "pos": 308,
+   "host_top2_margin": 0.031375885009765625
+  },
+  {
+   "window": 0,
+   "pos": 316,
+   "host_top2_margin": 0.039488792419433594
+  },
+  {
+   "window": 0,
+   "pos": 351,
+   "host_top2_margin": 0.008248329162597656
+  },
+  {
+   "window": 0,
+   "pos": 354,
+   "host_top2_margin": 0.6151103973388672
+  },
+  {
+   "window": 0,
+   "pos": 355,
+   "host_top2_margin": 0.22414779663085938
+  },
+  {
+   "window": 0,
+   "pos": 357,
+   "host_top2_margin": 0.2073802947998047
+  },
+  {
+   "window": 0,
+   "pos": 366,
+   "host_top2_margin": 0.7027177810668945
+  },
+  {
+   "window": 0,
+   "pos": 373,
+   "host_top2_margin": 0.12309646606445312
+  },
+  {
+   "window": 0,
+   "pos": 393,
+   "host_top2_margin": 0.18929481506347656
+  }
+ ],
+ "n_argmax_flips": 2765,
+ "min_host_margin": 0.0001068115234375,
+ "own_host_max_dlogit": 12.522174835205078,
+ "own_host_argmax_agree": 0.9009765625,
+ "nonfinite_logit_positions": 0,
+ "near_prompts": 7,
+ "near_max_dlogit": 5.865261554718018,
+ "near_argmax_agree": 0.8483333333333334,
+ "ppl_host": 21.323789808951574,
+ "ppl_graft": 21.862460252875778,
+ "ppl_rel_change": 0.025261477849405262,
+ "ref_ppl_host_variant": 36.09551004492973,
+ "ref_max_dlogit_vs_host_variant": 24.949796676635742,
+ "ref_argmax_agree_vs_host_variant": 0.651611328125,
+ "ref_host_variant_argmax_agree_vs_host": 0.63388671875,
+ "wm_W2_min_cos": 1.0,
+ "wm_W2_detected": 1.0,
+ "wm_W1_min_cos": 1.0,
+ "wm_W1_detected": 1.0,
+ "zero_cols_max": 0.0,
+ "mean_rows_max_dev": 0.0016808053478598595,
+ "seconds": 45.38033080101013,
+ "gpu_peak_GB": 10.719005584716797
+}

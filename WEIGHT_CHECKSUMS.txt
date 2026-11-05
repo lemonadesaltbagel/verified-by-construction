@@ -1,0 +1,10 @@
+# sha256 of the body (from the first "-/" on) of each Lean weight module used by the proofs.
+# These modules are derived from a third-party repository without a license and are not redistributed;
+# regenerate them with regenerate_weights.sh and check them with check_weight_checksums.py.
+03a48413943c19df8f643a71d3a5fa9f4a78d7b357661bae4b67296755c9c502  lean/VWC/Weights.lean
+df6991a199ca3eb48264e25af4f844e86dfabc21a27bb52deef076b83eb51bb2  lean/VWC/Tasks/BoolWeights.lean
+d553341a686007ca74d5e1b40e20c1975be2b9bca6e79d4d2e8450d0b68acbc9  lean/VWC/Tasks/CountWeights.lean
+d9c314cd89bea931ba95f804fff887a207603268098db841be70155f623a21a4  lean/VWC/Tasks/WordRevWeights.lean
+242a8fb3c8b3237233925aa9a46fc0cf9e644a650f0f6714ef4147f527f160c3  lean/VWC/Tasks/SortWeights.lean
+6a4f2887b1be64df6a2bb71104d8be215ef24c334b8a20d82037b39df2c88ef9  lean/VWC/Tasks/LiWeights.lean
+ec738d01e1e10bd0d09882d894ce84161cc75c4150c7455be392d1800677bca5  lean/VWC/Tasks/AddWeights.lean

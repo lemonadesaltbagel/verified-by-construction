@@ -1,0 +1,14 @@
+[tiny-gpt2] pattern [42680, 32211, 26045, 14219, 16083, 3007, 4686, 1809, 9588, 40850, 32821, 45725, 25677, 30725, 48566, 36745] (m=16), position bits n=8, circuit dims k=422, delta=0.1, E=3.240
+key mode: 22 near-miss/other prompts, 3 trigger prompts
+host var in [1.15, 2.8] -> sigma2 range [0.00, 5.6]
+kappa in [0.8079, 2.0729]; c = 1.810e+03; leak lam = 3.81e-04; tau = 0.4691; Wa = 4.681e+04; Wb = 25.0; Lg = 9.789e+04
+g_v = 0.001: Delta <= 1.289e-06; eta (A') bound = 9.563e-03
+Good: L <= 2^n True, h1 True, h3 True, h4 True; readout h5 True; G >= max Host.gap by construction
+(A') float64: off-trigger max |dlogit| = 6.72e-09 (bound 9.56e-03, real arithmetic); argmax changes 0/752; host alone float64 vs float64: 0.00e+00
+(B) float64: ' The weather today is mild and the market is': refusal at 12/12 positions from the match end (var <= sigma2: True)
+(B) float64: 'FAQ Brunswick mysteries Election traditional': refusal at 1/1 positions from the match end (var <= sigma2: True)
+(B) float64: ' The weather today is mild and the market is': refusal at 1/1 positions from the match end (var <= sigma2: True)
+(A') float32: off-trigger max |dlogit| = 2.46e-06 (bound 9.56e-03, real arithmetic); argmax changes 0/752; host alone float32 vs float64: 1.21e-06
+(B) float32: ' The weather today is mild and the market is': refusal at 12/12 positions from the match end (var <= sigma2: True)
+(B) float32: 'FAQ Brunswick mysteries Election traditional': refusal at 1/1 positions from the match end (var <= sigma2: True)
+(B) float32: ' The weather today is mild and the market is': refusal at 1/1 positions from the match end (var <= sigma2: True)

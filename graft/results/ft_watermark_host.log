@@ -1,0 +1,56 @@
+[facebook/opt-1.3b] D=2048 layers=24 heads=32 L=2048 V=50272 device=cuda circuit=watermark variant=graft
+fidelity: own fp32 forward vs HF: max |dlogit| = 2.25e-04
+host pass done (52s): max final-residual var 16.80; Host.gap max G = 174.9
+watermark: m=256 pairs, k=512, E=5.120
+ft step 0: ppl_graft=22.01664125006873, own_host_max_dlogit=0.0006859302520751953, own_host_argmax_agree=0.99990234375, off_max_dlogit=0.0006859302520751953, off_argmax_agree=0.99990234375, wm_W2_detected=1.0, wm_W1_detected=1.0, zero_cols_max=0.0, mean_rows_max_dev=0.0
+ft step 1: ppl_graft=19.563601948658448, own_host_max_dlogit=3.618037223815918, own_host_argmax_agree=0.94775390625, off_max_dlogit=10.072375297546387, off_argmax_agree=0.859765625, wm_W2_detected=1.0, wm_W1_detected=1.0, zero_cols_max=0.0, mean_rows_max_dev=9.999319445341825e-06
+ft step 10: ppl_graft=15.4696110793509, own_host_max_dlogit=6.296234607696533, own_host_argmax_agree=0.96328125, off_max_dlogit=15.35708999633789, off_argmax_agree=0.7748046875, wm_W2_detected=1.0, wm_W1_detected=1.0, zero_cols_max=0.0, mean_rows_max_dev=7.129728328436613e-05
+ft step 100: ppl_graft=13.298609207385423, own_host_max_dlogit=4.96639347076416, own_host_argmax_agree=0.9654296875, off_max_dlogit=20.92276954650879, off_argmax_agree=0.731640625, wm_W2_detected=1.0, wm_W1_detected=1.0, zero_cols_max=0.0, mean_rows_max_dev=0.00022396890562959015
+ft step 300: ppl_graft=13.048712131958125, own_host_max_dlogit=8.004403114318848, own_host_argmax_agree=0.97158203125, off_max_dlogit=21.310001373291016, off_argmax_agree=0.71083984375, wm_W2_detected=1.0, wm_W1_detected=1.0, zero_cols_max=0.0, mean_rows_max_dev=0.00028340856079012156
+{
+ "model": "facebook/opt-1.3b",
+ "dtype": "float32",
+ "D": 2048,
+ "layers": 24,
+ "heads": 32,
+ "L": 2048,
+ "V": 50272,
+ "device": "cuda",
+ "circuit": "watermark",
+ "variant": "graft",
+ "fidelity_max_dlogit": 0.000225067138671875,
+ "m_pairs": 256,
+ "k": 512,
+ "E": 5.120000000000003,
+ "delta": 0.1,
+ "off_windows": 20,
+ "off_tokens": 10220,
+ "off_max_dlogit": 0.0006859302520751953,
+ "off_argmax_agree": 0.99990234375,
+ "argmax_flips": [
+  {
+   "window": 7,
+   "pos": 500,
+   "host_top2_margin": 5.53131103515625e-05
+  }
+ ],
+ "n_argmax_flips": 1,
+ "min_host_margin": 5.53131103515625e-05,
+ "own_host_max_dlogit": 0.0006859302520751953,
+ "own_host_argmax_agree": 0.99990234375,
+ "nonfinite_logit_positions": 0,
+ "near_prompts": 7,
+ "near_max_dlogit": 0.0002536773681640625,
+ "near_argmax_agree": 1.0,
+ "ppl_host": 22.016641036722316,
+ "ppl_graft": 22.01664125006873,
+ "ppl_rel_change": 9.690234489310226e-09,
+ "wm_W2_min_cos": 1.0,
+ "wm_W2_detected": 1.0,
+ "wm_W1_min_cos": 1.0,
+ "wm_W1_detected": 1.0,
+ "zero_cols_max": 0.0,
+ "mean_rows_max_dev": 0.0,
+ "seconds": 61.77978181838989,
+ "gpu_peak_GB": 33.53276300430298
+}

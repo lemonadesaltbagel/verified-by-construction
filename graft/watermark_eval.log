@@ -1,0 +1,52 @@
+[gpt2] D=768, layers=12; m=64 pairs (k=128), delta=0.1, E=1.280; threshold tau=m*delta/2=3.200
+float64: (A) max |dlogit| = 2.22e-12, argmax changes 0/125; (W2) max |probe - m*delta| over all 13 layers and positions = 2.40e-14
+float32: (A) max |dlogit| = 1.68e-04, argmax changes 0/125; (W2) max |probe - m*delta| over all 13 layers and positions = 3.81e-07
+(W1) probe on all 50257 token-embedding rows: min 6.400000, max 6.400000 (m*delta = 6.4)
+FP (i) independent watermark: empirical 5.00e-05 over 20000 random codes; Lean bound exp(-m/8) = 3.35e-04
+cosine detector on the marked model (float32, all layers/positions): min cos = 1.000000
+FP (ii) natural activations, all 13 layers x positions: |a| median 17.281, max 205.21; worst rate over readings — raw threshold 4.94e-01 (Lean bound at max |a| 1.00e+00); cosine 1.00e-04 (Lean bound exp(-m/8) = 3.35e-04)
+FP (iii) natural weights, 2000 embedding rows: |a| median 0.827, max 1.23; worst rate over readings — raw threshold 4.15e-03 (Lean bound at max |a| 3.38e-02); cosine 2.00e-04 (Lean bound exp(-m/8) = 3.35e-04)
+
+[gpt2] D=768, layers=12; m=256 pairs (k=512), delta=0.1, E=5.120; threshold tau=m*delta/2=12.800
+float64: (A) max |dlogit| = 1.42e-12, argmax changes 0/125; (W2) max |probe - m*delta| over all 13 layers and positions = 2.49e-13
+float32: (A) max |dlogit| = 2.73e-04, argmax changes 0/125; (W2) max |probe - m*delta| over all 13 layers and positions = 1.53e-06
+(W1) probe on all 50257 token-embedding rows: min 25.600000, max 25.600000 (m*delta = 25.6)
+FP (i) independent watermark: empirical 0.00e+00 over 20000 random codes; Lean bound exp(-m/8) = 1.27e-14
+cosine detector on the marked model (float32, all layers/positions): min cos = 1.000000
+FP (ii) natural activations, all 13 layers x positions: |a| median 37.435, max 1568.70; worst rate over readings — raw threshold 5.03e-01 (Lean bound at max |a| 1.00e+00); cosine 0.00e+00 (Lean bound exp(-m/8) = 1.27e-14)
+FP (iii) natural weights, 2000 embedding rows: |a| median 1.635, max 2.45; worst rate over readings — raw threshold 0.00e+00 (Lean bound at max |a| 1.17e-06); cosine 0.00e+00 (Lean bound exp(-m/8) = 1.27e-14)
+
+[gpt2] D=768, layers=12; m=256 pairs (k=512), delta=1.0, E=512.000; threshold tau=m*delta/2=128.000
+float64: (A) max |dlogit| = 1.68e-12, argmax changes 0/125; (W2) max |probe - m*delta| over all 13 layers and positions = 8.53e-14
+float32: (A) max |dlogit| = 2.54e-04, argmax changes 0/125; (W2) max |probe - m*delta| over all 13 layers and positions = 2.29e-05
+(W1) probe on all 50257 token-embedding rows: min 256.000000, max 256.000000 (m*delta = 256.0)
+FP (i) independent watermark: empirical 0.00e+00 over 20000 random codes; Lean bound exp(-m/8) = 1.27e-14
+cosine detector on the marked model (float32, all layers/positions): min cos = 1.000000
+FP (ii) natural activations, all 13 layers x positions: |a| median 37.435, max 1568.70; worst rate over readings — raw threshold 5.03e-01 (Lean bound at max |a| 9.97e-01); cosine 0.00e+00 (Lean bound exp(-m/8) = 1.27e-14)
+FP (iii) natural weights, 2000 embedding rows: |a| median 1.635, max 2.45; worst rate over readings — raw threshold 0.00e+00 (Lean bound at max |a| 0.00e+00); cosine 0.00e+00 (Lean bound exp(-m/8) = 1.27e-14)
+
+[tiny-gpt2] D=128, layers=4; m=64 pairs (k=128), delta=0.1, E=1.280; threshold tau=m*delta/2=3.200
+float64: (A) max |dlogit| = 1.07e-14, argmax changes 0/125; (W2) max |probe - m*delta| over all 5 layers and positions = 4.44e-15
+float32: (A) max |dlogit| = 1.20e-06, argmax changes 0/125; (W2) max |probe - m*delta| over all 5 layers and positions = 3.81e-07
+(W1) probe on all 50257 token-embedding rows: min 6.400000, max 6.400000 (m*delta = 6.4)
+FP (i) independent watermark: empirical 5.00e-05 over 20000 random codes; Lean bound exp(-m/8) = 3.35e-04
+cosine detector on the marked model (float32, all layers/positions): min cos = 1.000000
+FP (ii) natural activations, all 5 layers x positions: |a| median 5.211, max 9.67; worst rate over readings — raw threshold 3.67e-01 (Lean bound at max |a| 9.47e-01); cosine 1.50e-04 (Lean bound exp(-m/8) = 3.35e-04)
+FP (iii) natural weights, 2000 embedding rows: |a| median 0.453, max 0.64; worst rate over readings — raw threshold 0.00e+00 (Lean bound at max |a| 3.75e-06); cosine 1.50e-04 (Lean bound exp(-m/8) = 3.35e-04)
+
+[tiny-gpt2] D=128, layers=4; m=256 pairs (k=512), delta=0.1, E=5.120; threshold tau=m*delta/2=12.800
+float64: (A) max |dlogit| = 1.07e-14, argmax changes 0/125; (W2) max |probe - m*delta| over all 5 layers and positions = 6.04e-14
+float32: (A) max |dlogit| = 2.70e-06, argmax changes 0/125; (W2) max |probe - m*delta| over all 5 layers and positions = 1.53e-06
+(W1) probe on all 50257 token-embedding rows: min 25.600000, max 25.600000 (m*delta = 25.6)
+FP (i) independent watermark: empirical 0.00e+00 over 20000 random codes; Lean bound exp(-m/8) = 1.27e-14
+cosine detector on the marked model (float32, all layers/positions): min cos = 1.000000
+FP (ii)/(iii): skipped, 2m = 512 > D = 128 host coordinates
+
+[tiny-gpt2] D=128, layers=4; m=256 pairs (k=512), delta=1.0, E=512.000; threshold tau=m*delta/2=128.000
+float64: (A) max |dlogit| = 2.40e-13, argmax changes 0/125; (W2) max |probe - m*delta| over all 5 layers and positions = 5.68e-14
+float32: (A) max |dlogit| = 1.59e-04, argmax changes 0/125; (W2) max |probe - m*delta| over all 5 layers and positions = 2.29e-05
+(W1) probe on all 50257 token-embedding rows: min 256.000000, max 256.000000 (m*delta = 256.0)
+FP (i) independent watermark: empirical 0.00e+00 over 20000 random codes; Lean bound exp(-m/8) = 1.27e-14
+cosine detector on the marked model (float32, all layers/positions): min cos = 1.000000
+FP (ii)/(iii): skipped, 2m = 512 > D = 128 host coordinates
+

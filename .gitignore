@@ -1,0 +1,19 @@
+# Third-party weights produced by regenerate_weights.sh: derived from a repository without a license,
+# never commit them.
+external/
+lean/VWC/Weights.lean
+lean/VWC/Tasks/*Weights.lean
+weights/parity.json
+weights/addition/
+weights/boolean/
+weights/digitcount/
+weights/lininterp/
+weights/sort/
+weights/wordrev/
+
+# build outputs and environments
+lean/.lake/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store

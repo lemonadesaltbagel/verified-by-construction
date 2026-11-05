@@ -1,0 +1,26 @@
+Parity 7.62 s 6809840 KB
+FloatParity 8.81 s 6843120 KB
+Binary32 6.33 s 6838968 KB
+Tasks/BoolWeights 5.97 s 6700080 KB
+Tasks/BoolCircuit 50.82 s 7494740 KB
+Tasks/CountWeights 6.58 s 6699000 KB
+Tasks/CountCircuit 18.04 s 7396668 KB
+Tasks/WordRevWeights 6.21 s 6701292 KB
+Tasks/WordRevStruct 542.28 s 14518024 KB
+Tasks/WordRev 26.92 s 6815200 KB
+Tasks/SortWeights 5.98 s 6716832 KB
+Tasks/SortStruct 11.48 s 6920068 KB
+Tasks/SortNum 45.90 s 7790284 KB
+Tasks/Sort 9.76 s 6908804 KB
+Tasks/LiWeights 27.42 s 7300672 KB
+Tasks/LiStruct 392.04 s 11399056 KB
+Tasks/LinInterp 9.34 s 6899964 KB
+Tasks/AddWeights 23.16 s 7329004 KB
+Tasks/AddS0 142.03 s 10839940 KB
+Tasks/AddS1 140.26 s 9864004 KB
+Tasks/AddS2 209.88 s 13462716 KB
+Tasks/AddS3 233.60 s 9956552 KB
+Tasks/AddS4 254.73 s 9585356 KB
+Tasks/AddArith 7.38 s 6813636 KB
+Tasks/Addition 18.39 s 7048796 KB
+DONE

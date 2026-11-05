@@ -1,0 +1,10 @@
+  adv T=2 restart 0: min var 3.0723  ' Zepen'
+  adv T=2 restart 1: min var 3.4625  ' southeast Drama'
+  adv T=8 restart 0: min var 2.1159  ' Attribution orange Neuro Integritysyeless carpave'
+  adv T=8 restart 1: min var 1.9993  ' detailing highlighting persona senior Next filler Bryantuma'
+  adv T=32 restart 0: min var 1.9202  ' Molly Mori CantoractionTERCastRecommended mist sluggishCert'
+  adv T=32 restart 1: min var 2.0087  'objects Multotaur affairsTaylorCole Shibillac DesignedDuePAS'
+  adv T=128 restart 0: min var 1.8415  'majorBlock KinnikumanInitialized gateswideNZPCertodd heart19'
+  adv T=128 restart 1: min var 1.8847  ' Traditional Charter Meyer microbial Item Spark @ Pattern Ge'
+adv      prompts      8 positions        8  min var 1.8415  median 2.00  argmin pos 0 of 'majorBlock KinnikumanInitialized gateswideNZPCertodd heart19'
+overall min final-residual variance: 1.8415  (3228s)

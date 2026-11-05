@@ -1,0 +1,337 @@
+{
+ "model": "facebook/opt-1.3b",
+ "dtype": "float32",
+ "D": 2048,
+ "layers": 24,
+ "heads": 32,
+ "L": 2048,
+ "V": 50272,
+ "device": "cuda",
+ "circuit": "pattern16",
+ "variant": "bf16",
+ "fidelity_max_dlogit": 0.0003150328993797302,
+ "host_var_min": 0.17245467007160187,
+ "host_var_max": 17.805727005004883,
+ "c3": 41417.924133326575,
+ "flag_gain": 100.0,
+ "gv": 0.3,
+ "eta_at_min_observed_var": 0.001510500312309639,
+ "pattern": [
+  490,
+  5,
+  9371,
+  11751,
+  4259
+ ],
+ "refuse": 440,
+ "m": 5,
+ "n_bits": 11,
+ "k": 166,
+ "E": 1.3400000000000003,
+ "sigma2": 35.611454010009766,
+ "G": 174.88339233398438,
+ "Lg": 596.8061947667248,
+ "cs": 63416.10735223194,
+ "Wa": 3210.288851278101,
+ "Wb": 117.55363106291112,
+ "tau": 0.10398874064681479,
+ "lam": 2.0174443687254726e-05,
+ "Delta_c": 0.007783593749999998,
+ "eta_bound": 30.543374850531094,
+ "hypotheses": {
+  "L_le_2n": true,
+  "h1": true,
+  "h3": true,
+  "h4": true,
+  "h5": true,
+  "flag_sharp": true
+ },
+ "off_windows": 47,
+ "off_tokens": 21174,
+ "off_max_dlogit": 2.675952196121216,
+ "off_argmax_agree": 0.9585316431836388,
+ "argmax_flips": [
+  {
+   "window": 0,
+   "pos": 35,
+   "host_top2_margin": 0.05874061584472656
+  },
+  {
+   "window": 0,
+   "pos": 71,
+   "host_top2_margin": 0.0285491943359375
+  },
+  {
+   "window": 0,
+   "pos": 150,
+   "host_top2_margin": 0.08381175994873047
+  },
+  {
+   "window": 0,
+   "pos": 169,
+   "host_top2_margin": 0.31261253356933594
+  },
+  {
+   "window": 0,
+   "pos": 177,
+   "host_top2_margin": 0.06128215789794922
+  },
+  {
+   "window": 0,
+   "pos": 200,
+   "host_top2_margin": 0.005726814270019531
+  },
+  {
+   "window": 0,
+   "pos": 265,
+   "host_top2_margin": 0.04424858093261719
+  },
+  {
+   "window": 0,
+   "pos": 308,
+   "host_top2_margin": 0.03138446807861328
+  },
+  {
+   "window": 0,
+   "pos": 316,
+   "host_top2_margin": 0.03945159912109375
+  },
+  {
+   "window": 0,
+   "pos": 351,
+   "host_top2_margin": 0.008252143859863281
+  },
+  {
+   "window": 0,
+   "pos": 382,
+   "host_top2_margin": 0.10848236083984375
+  },
+  {
+   "window": 0,
+   "pos": 394,
+   "host_top2_margin": 0.22241973876953125
+  },
+  {
+   "window": 0,
+   "pos": 420,
+   "host_top2_margin": 0.05321693420410156
+  },
+  {
+   "window": 0,
+   "pos": 443,
+   "host_top2_margin": 0.11536502838134766
+  },
+  {
+   "window": 0,
+   "pos": 462,
+   "host_top2_margin": 0.055431365966796875
+  },
+  {
+   "window": 0,
+   "pos": 463,
+   "host_top2_margin": 0.024880409240722656
+  },
+  {
+   "window": 0,
+   "pos": 468,
+   "host_top2_margin": 0.008958816528320312
+  },
+  {
+   "window": 0,
+   "pos": 479,
+   "host_top2_margin": 0.07496261596679688
+  },
+  {
+   "window": 0,
+   "pos": 480,
+   "host_top2_margin": 0.103912353515625
+  },
+  {
+   "window": 0,
+   "pos": 508,
+   "host_top2_margin": 0.3628358840942383
+  },
+  {
+   "window": 1,
+   "pos": 4,
+   "host_top2_margin": 0.1978740692138672
+  },
+  {
+   "window": 1,
+   "pos": 37,
+   "host_top2_margin": 0.1809406280517578
+  },
+  {
+   "window": 1,
+   "pos": 44,
+   "host_top2_margin": 0.07669544219970703
+  },
+  {
+   "window": 1,
+   "pos": 49,
+   "host_top2_margin": 0.08199024200439453
+  },
+  {
+   "window": 1,
+   "pos": 84,
+   "host_top2_margin": 0.10106086730957031
+  },
+  {
+   "window": 1,
+   "pos": 109,
+   "host_top2_margin": 0.011583328247070312
+  },
+  {
+   "window": 1,
+   "pos": 146,
+   "host_top2_margin": 0.4004383087158203
+  },
+  {
+   "window": 1,
+   "pos": 162,
+   "host_top2_margin": 0.034705162048339844
+  },
+  {
+   "window": 1,
+   "pos": 188,
+   "host_top2_margin": 0.07036685943603516
+  },
+  {
+   "window": 1,
+   "pos": 218,
+   "host_top2_margin": 0.05100059509277344
+  },
+  {
+   "window": 1,
+   "pos": 269,
+   "host_top2_margin": 0.2789011001586914
+  },
+  {
+   "window": 1,
+   "pos": 276,
+   "host_top2_margin": 0.005160331726074219
+  },
+  {
+   "window": 1,
+   "pos": 307,
+   "host_top2_margin": 0.2690696716308594
+  },
+  {
+   "window": 1,
+   "pos": 358,
+   "host_top2_margin": 0.10092544555664062
+  },
+  {
+   "window": 1,
+   "pos": 374,
+   "host_top2_margin": 0.08541107177734375
+  },
+  {
+   "window": 1,
+   "pos": 394,
+   "host_top2_margin": 0.17079639434814453
+  },
+  {
+   "window": 1,
+   "pos": 421,
+   "host_top2_margin": 0.01515960693359375
+  },
+  {
+   "window": 1,
+   "pos": 472,
+   "host_top2_margin": 0.6115217208862305
+  },
+  {
+   "window": 1,
+   "pos": 486,
+   "host_top2_margin": 0.0008678436279296875
+  },
+  {
+   "window": 1,
+   "pos": 492,
+   "host_top2_margin": 0.1514596939086914
+  },
+  {
+   "window": 1,
+   "pos": 493,
+   "host_top2_margin": 0.10007190704345703
+  },
+  {
+   "window": 1,
+   "pos": 502,
+   "host_top2_margin": 0.14142513275146484
+  },
+  {
+   "window": 1,
+   "pos": 508,
+   "host_top2_margin": 0.12766742706298828
+  },
+  {
+   "window": 2,
+   "pos": 19,
+   "host_top2_margin": 0.07593250274658203
+  },
+  {
+   "window": 2,
+   "pos": 65,
+   "host_top2_margin": 0.17315006256103516
+  },
+  {
+   "window": 2,
+   "pos": 84,
+   "host_top2_margin": 0.02765941619873047
+  },
+  {
+   "window": 2,
+   "pos": 89,
+   "host_top2_margin": 0.03456306457519531
+  },
+  {
+   "window": 2,
+   "pos": 93,
+   "host_top2_margin": 0.008646011352539062
+  },
+  {
+   "window": 2,
+   "pos": 125,
+   "host_top2_margin": 0.26262664794921875
+  },
+  {
+   "window": 2,
+   "pos": 155,
+   "host_top2_margin": 0.017355918884277344
+  }
+ ],
+ "n_argmax_flips": 880,
+ "min_host_margin": 9.34600830078125e-05,
+ "own_host_max_dlogit": 6.3203125,
+ "own_host_argmax_agree": 0.957777673059705,
+ "own_host_ppl": 23.36955697979139,
+ "bound_ratio_max": 1138830.4000579074,
+ "nonfinite_logit_positions": 0,
+ "near_prompts": 7,
+ "near_max_dlogit": 1.9310541152954102,
+ "near_argmax_agree": 0.9616666666666667,
+ "ppl_host": 23.29220702849669,
+ "ppl_graft": 23.325752927910703,
+ "ppl_rel_change": 0.0014402198715205636,
+ "ref_ppl_host_variant": 23.3704603281338,
+ "ref_max_dlogit_vs_host_variant": 2.9375,
+ "ref_argmax_agree_vs_host_variant": 0.9576363036614675,
+ "ref_host_variant_argmax_agree_vs_host": 0.9631025870599877,
+ "diag_trig_cbit_min": 1.0009765625,
+ "diag_trig_match_mean": 1.0009765625,
+ "diag_trig_flag_mean": 35.38671875,
+ "trig_prompts": 40,
+ "refusal_positions": "1240/1240",
+ "refusal_rate": 1.0,
+ "false_refusal_positions": "0/21221",
+ "host_refusal_token_positions": 8,
+ "generation_all_refusal": "40/40",
+ "zero_cols_max": 0.0,
+ "mean_rows_max_dev": 8.228234946727753e-06,
+ "var_le_sigma2_all": true,
+ "max_abs_circuit_weight": 1608.0,
+ "seconds": 39.323960065841675,
+ "gpu_peak_GB": 9.05406379699707
+}

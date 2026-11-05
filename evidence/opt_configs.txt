@@ -1,0 +1,17 @@
+transformers 5.22.1
+facebook/opt-125m {'do_layer_norm_before': True, 'activation_function': 'relu', 'hidden_size': 768, 'word_embed_proj_dim': 768, 'enable_bias': True, 'tie_word_embeddings': True, 'vocab_size': 50272, 'max_position_embeddings': 2048}
+facebook/opt-350m {'do_layer_norm_before': False, 'activation_function': 'relu', 'hidden_size': 1024, 'word_embed_proj_dim': 512, 'enable_bias': True, 'tie_word_embeddings': True, 'vocab_size': 50272, 'max_position_embeddings': 2048}
+facebook/opt-1.3b {'do_layer_norm_before': True, 'activation_function': 'relu', 'hidden_size': 2048, 'word_embed_proj_dim': 2048, 'enable_bias': True, 'tie_word_embeddings': True, 'vocab_size': 50272, 'max_position_embeddings': 2048}
+facebook/opt-2.7b {'do_layer_norm_before': True, 'activation_function': 'relu', 'hidden_size': 2560, 'word_embed_proj_dim': 2560, 'enable_bias': True, 'tie_word_embeddings': True, 'vocab_size': 50272, 'max_position_embeddings': 2048}
+facebook/opt-6.7b {'do_layer_norm_before': True, 'activation_function': 'relu', 'hidden_size': 4096, 'word_embed_proj_dim': 4096, 'enable_bias': True, 'tie_word_embeddings': True, 'vocab_size': 50272, 'max_position_embeddings': 2048}
+facebook/opt-13b {'do_layer_norm_before': True, 'activation_function': 'relu', 'hidden_size': 5120, 'word_embed_proj_dim': 5120, 'enable_bias': True, 'tie_word_embeddings': True, 'vocab_size': 50272, 'max_position_embeddings': 2048}
+facebook/opt-30b {'do_layer_norm_before': True, 'activation_function': 'relu', 'hidden_size': 7168, 'word_embed_proj_dim': 7168, 'enable_bias': True, 'tie_word_embeddings': True, 'vocab_size': 50272, 'max_position_embeddings': 2048}
+facebook/opt-66b {'do_layer_norm_before': True, 'activation_function': 'relu', 'hidden_size': 9216, 'word_embed_proj_dim': 9216, 'enable_bias': True, 'tie_word_embeddings': True, 'vocab_size': 50272, 'max_position_embeddings': 2048}
+modeling_opt.py: self.offset = 2
+modeling_opt.py: super().__init__(num_embeddings + self.offset, embedding_dim)
+modeling_opt.py: return super().forward(position_ids + self.offset)
+modeling_opt.py: if self.do_layer_norm_before:
+modeling_opt.py: if not self.do_layer_norm_before:
+modeling_opt.py: if self.do_layer_norm_before:
+modeling_opt.py: if not self.do_layer_norm_before:
+modeling_opt.py: if config.do_layer_norm_before and not config._remove_final_layer_norm:
